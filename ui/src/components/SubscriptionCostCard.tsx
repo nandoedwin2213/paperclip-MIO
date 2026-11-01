@@ -9,6 +9,7 @@ import { Card } from "./ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { tx } from "@/i18n/phrases";
 
 export function subscriptionMoney(cents: string, currency: string) {
   return currency === "USD" ? formatCents(Number(cents))
@@ -42,23 +43,23 @@ function SubscriptionEditor({ account, accounts, companyId, onDone }: {
   const selectClass = "h-9 rounded-md border border-input bg-background px-3 text-sm";
   return <div className="space-y-5">
     <form className="space-y-4" onSubmit={event => { event.preventDefault(); save.mutate(); }}>
-      <div className="space-y-2"><Label htmlFor="subscription-plan">Plan</Label><Input id="subscription-plan" value={plan} onChange={event => setPlan(event.target.value)} required maxLength={100} /></div>
+      <div className="space-y-2"><Label htmlFor="subscription-plan">{tx("Plan")}</Label><Input id="subscription-plan" value={plan} onChange={event => setPlan(event.target.value)} required maxLength={100} /></div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-2"><Label htmlFor="subscription-price">Price per billing period</Label><Input id="subscription-price" type="number" min="0" step="any" value={amount} placeholder="Unknown" onChange={event => setAmount(event.target.value)} /></div>
-        <div className="space-y-2"><Label htmlFor="subscription-currency">Currency</Label><select id="subscription-currency" className={selectClass} value={currency} onChange={event => setCurrency(event.target.value)}>{SUBSCRIPTION_CURRENCIES.map(code => <option key={code}>{code}</option>)}</select></div>
-        <div className="space-y-2"><Label htmlFor="subscription-cadence">Billed</Label><select id="subscription-cadence" className={selectClass} value={cadence} onChange={event => setCadence(event.target.value as typeof cadence)}><option value="month">Monthly</option><option value="year">Annually</option></select></div>
-        <div className="space-y-2"><Label htmlFor="subscription-status">Tracking</Label><select id="subscription-status" className={selectClass} value={status} onChange={event => setStatus(event.target.value as typeof status)}><option value="active">Active</option><option value="ended">Subscription ended</option><option value="excluded">Exclude from this organization</option></select></div>
+        <div className="space-y-2"><Label htmlFor="subscription-price">{tx("Price per billing period")}</Label><Input id="subscription-price" type="number" min="0" step="any" value={amount} placeholder={tx("Unknown")} onChange={event => setAmount(event.target.value)} /></div>
+        <div className="space-y-2"><Label htmlFor="subscription-currency">{tx("Currency")}</Label><select id="subscription-currency" className={selectClass} value={currency} onChange={event => setCurrency(event.target.value)}>{SUBSCRIPTION_CURRENCIES.map(code => <option key={code}>{code}</option>)}</select></div>
+        <div className="space-y-2"><Label htmlFor="subscription-cadence">{tx("Billed")}</Label><select id="subscription-cadence" className={selectClass} value={cadence} onChange={event => setCadence(event.target.value as typeof cadence)}><option value="month">{tx("Monthly")}</option><option value="year">{tx("Annually")}</option></select></div>
+        <div className="space-y-2"><Label htmlFor="subscription-status">{tx("Tracking")}</Label><select id="subscription-status" className={selectClass} value={status} onChange={event => setStatus(event.target.value as typeof status)}><option value="active">{tx("Active")}</option><option value="ended">{tx("Subscription ended")}</option><option value="excluded">{tx("Exclude from this organization")}</option></select></div>
       </div>
       <p className="text-xs text-muted-foreground">Enter the full amount for one account or seat. Annual prices are divided by 12. Changes apply from now. Ending tracking here does not cancel your provider subscription.</p>
       {save.error && <p role="alert" className="text-sm text-destructive">Could not save this price. Check the amount, or reopen the account if another person updated it.</p>}
-      <div className="flex items-center justify-between"><Button type="button" variant="ghost" disabled={busy} onClick={onDone}>Cancel</Button><Button type="submit" disabled={busy}>{save.isPending ? "Saving…" : "Save price"}</Button></div>
+      <div className="flex items-center justify-between"><Button type="button" variant="ghost" disabled={busy} onClick={onDone}>{tx("Cancel")}</Button><Button type="submit" disabled={busy}>{save.isPending ? "Saving…" : "Save price"}</Button></div>
     </form>
     {targets.length > 0 && <div className="space-y-2 border-t border-border pt-4">
-      <Label htmlFor="subscription-link">Same subscription as another account?</Label>
-      <select id="subscription-link" className={selectClass} value={targetId} onChange={event => setTargetId(event.target.value)}><option value="">Choose an account</option>{targets.map(row => <option key={row.id} value={row.id}>{row.name} · {row.price.plan}</option>)}</select>
+      <Label htmlFor="subscription-link">{tx("Same subscription as another account?")}</Label>
+      <select id="subscription-link" className={selectClass} value={targetId} onChange={event => setTargetId(event.target.value)}><option value="">{tx("Choose an account")}</option>{targets.map(row => <option key={row.id} value={row.id}>{row.name} · {row.price.plan}</option>)}</select>
       <p className="text-xs text-muted-foreground">Linking counts these accounts once, combines their Paperclip usage, and keeps the selected account’s price. Only link the same subscription or paid seat.</p>
-      {link.error && <p role="alert" className="text-sm text-destructive">Could not link these accounts. Reopen their details and try again.</p>}
-      <Button type="button" variant="outline" disabled={!targetId || busy} onClick={() => link.mutate()}>Link accounts</Button>
+      {link.error && <p role="alert" className="text-sm text-destructive">{tx("Could not link these accounts. Reopen their details and try again.")}</p>}
+      <Button type="button" variant="outline" disabled={!targetId || busy} onClick={() => link.mutate()}>{tx("Link accounts")}</Button>
     </div>}
   </div>;
 }
@@ -73,22 +74,22 @@ export function SubscriptionCostCard({ companyId, report, error, onChanged }: {
   const estimatedCount = report?.monthlyTotals.reduce((sum, total) => sum + total.estimatedCount, 0) ?? 0;
   return <>
     <Card className="block p-4">
-      <div className="text-(length:--text-micro) uppercase tracking-(--tracking-eyebrow) text-muted-foreground">Subscriptions</div>
+      <div className="text-(length:--text-micro) uppercase tracking-(--tracking-eyebrow) text-muted-foreground">{tx("Subscriptions")}</div>
       <div className="mt-2 font-mono text-2xl font-semibold tabular-nums">
         {known ? report!.monthlyTotals.map(total => <div key={total.currency}>{subscriptionMoney(total.amountCents, total.currency)}<span className="text-sm font-normal">/month</span></div>) : report && report.activeCount === 0 && report.accounts.length > 0 ? "$0.00/month" : "—"}
       </div>
       <div className="mt-1 space-y-1 text-xs text-muted-foreground">
         {report ? <>
           {estimatedCount > 0 && <div><Badge variant="outline" className="font-normal text-muted-foreground">{estimatedCount < report.activeCount - report.unknownPriceCount ? "Partially estimated" : "Estimated"}</Badge></div>}
-          {report.unknownPriceCount > 0 && !!known && <div>Known monthly subtotal</div>}
+          {report.unknownPriceCount > 0 && !!known && <div>{tx("Known monthly subtotal")}</div>}
           <div>{report.accounts.length === 0 ? "No visible subscriptions" : <>{report.activeCount} active {report.activeCount === 1 ? "subscription" : "subscriptions"}{report.unknownPriceCount > 0 && ` · ${report.unknownPriceCount} ${report.unknownPriceCount === 1 ? "price" : "prices"} unknown`}</>}</div>
-          {report.accounts.length > 0 && <div>Monthly fees for accounts visible to you</div>}
+          {report.accounts.length > 0 && <div>{tx("Monthly fees for accounts visible to you")}</div>}
           {report.unidentifiedAccountCount > 0 && <div>{report.unidentifiedAccountCount} unconfirmed {report.unidentifiedAccountCount === 1 ? "account identity" : "account identities"}</div>}
           <SubscriptionTokenUsage usage={report.subscription} />
-        </> : error ? <div>Subscription data is unavailable.</div> : <div>Loading subscriptions…</div>}
-        {report && error ? <div>Showing last loaded subscription data.</div> : null}
+        </> : error ? <div>{tx("Subscription data is unavailable.")}</div> : <div>Loading subscriptions…</div>}
+        {report && error ? <div>{tx("Showing last loaded subscription data.")}</div> : null}
       </div>
-      <Button variant="link" size="sm" className="h-auto p-0" onClick={() => setOpen(true)} disabled={!report}>View details</Button>
+      <Button variant="link" size="sm" className="h-auto p-0" onClick={() => setOpen(true)} disabled={!report}>{tx("View details")}</Button>
     </Card>
     <Dialog open={open} onOpenChange={value => { setOpen(value); if (!value) setEditing(null); }}>
       <DialogContent className="max-h-(--sz-80vh) overflow-y-auto sm:max-w-3xl">
@@ -106,7 +107,7 @@ export function SubscriptionCostCard({ companyId, report, error, onChanged }: {
             {!account.identityVerified && <p className="text-xs text-muted-foreground">Account identity is unconfirmed. Link duplicates if these connections use the same subscription.</p>}
             {account.observedAt && <div className="text-xs text-muted-foreground">Plan checked {formatDateTime(account.observedAt)}{account.refreshStatus === "unavailable" ? " · latest check unavailable" : ""}</div>}
             {account.refreshStatus === "unavailable" && !account.observedAt && <p className="text-xs text-muted-foreground">The provider did not make plan details available. You can enter the price yourself.</p>}
-            {account.canEdit && <div><Button variant="outline" size="sm" onClick={() => setEditing(account)}>Edit price</Button></div>}
+            {account.canEdit && <div><Button variant="outline" size="sm" onClick={() => setEditing(account)}>{tx("Edit price")}</Button></div>}
           </div>)}
           {!!report?.unattributedSubscription.eventCount && <p className="text-xs text-muted-foreground">Some subscription usage has no recorded account. It is included in the subscription token total.</p>}
           <p className="text-xs text-muted-foreground">Monthly fees cover the whole account, including use outside Paperclip. They are separate from recorded charges and agent budgets. Currencies are totaled separately.</p>

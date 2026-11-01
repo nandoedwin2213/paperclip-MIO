@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "packageName": "@paperclipai/skills-catalog",
   "packageVersion": "0.3.1",
-  "generatedAt": "2026-10-06T01:21:47.421Z",
+  "generatedAt": "2026-11-01T23:29:22.121Z",
   "skills": [
     {
       "id": "paperclipai:bundled:docs:doc-maintenance",
@@ -37,6 +37,109 @@
         }
       ],
       "contentHash": "sha256:2e02299210fd17c1fe1867b4ee8c144a11b6fe1fe481f83b8268cfbaaf10f9aa"
+    },
+    {
+      "id": "paperclipai:bundled:health:clinical-evidence-review",
+      "key": "paperclipai/bundled/health/clinical-evidence-review",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "clinical-evidence-review",
+      "name": "clinical-evidence-review",
+      "description": "Summarise clinical evidence for health professionals — search guidelines and trials, grade certainty, cite every claim, and separate evidence from opinion, without giving patient-specific medical advice.",
+      "path": "catalog/bundled/health/clinical-evidence-review",
+      "entrypoint": "SKILL.md",
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "defaultInstall": false,
+      "recommendedForRoles": [
+        "researcher",
+        "general"
+      ],
+      "requires": [],
+      "tags": [
+        "health",
+        "evidence",
+        "research",
+        "clinical"
+      ],
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "skill",
+          "sizeBytes": 1949,
+          "sha256": "a4431cd09047701575f25fb5ef73fc84c8718e62bcf1209f4ca0afbda622fd57"
+        }
+      ],
+      "contentHash": "sha256:4daa99997686c5e7cf5bf958d9a5237cd2a54e2596968b970792a5247d60d638"
+    },
+    {
+      "id": "paperclipai:bundled:health:health-data-privacy",
+      "key": "paperclipai/bundled/health/health-data-privacy",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "health-data-privacy",
+      "name": "health-data-privacy",
+      "description": "Handle health data safely — minimise and de-identify patient information, check lawful basis and consent, and flag LOPDP Ecuador / HIPAA / GDPR risks before any task stores or shares clinical data.",
+      "path": "catalog/bundled/health/health-data-privacy",
+      "entrypoint": "SKILL.md",
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "defaultInstall": false,
+      "recommendedForRoles": [
+        "general",
+        "pm",
+        "ceo"
+      ],
+      "requires": [],
+      "tags": [
+        "health",
+        "privacy",
+        "compliance",
+        "lopdp"
+      ],
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "skill",
+          "sizeBytes": 2495,
+          "sha256": "10e7a591a7f88515f0de574ca9d60c358b2b0a043c47076b842b0663867d2552"
+        }
+      ],
+      "contentHash": "sha256:c4893b7ee48f2fab0f53abf49acb20dd0fd1bc6c5ec5e262fd6c32f5b3156683"
+    },
+    {
+      "id": "paperclipai:bundled:health:patient-communication",
+      "key": "paperclipai/bundled/health/patient-communication",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "patient-communication",
+      "name": "patient-communication",
+      "description": "Write clear, empathetic, bilingual (Spanish/English) patient-facing messages — appointment reminders, pre/post-procedure instructions, consent drafts, and education — at a plain-language reading level, always for clinician approval.",
+      "path": "catalog/bundled/health/patient-communication",
+      "entrypoint": "SKILL.md",
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "defaultInstall": false,
+      "recommendedForRoles": [
+        "cmo",
+        "general"
+      ],
+      "requires": [],
+      "tags": [
+        "health",
+        "communication",
+        "patients",
+        "bilingual"
+      ],
+      "files": [
+        {
+          "path": "SKILL.md",
+          "kind": "skill",
+          "sizeBytes": 1810,
+          "sha256": "ced8fc5fb5f1d7810b47e3c1b2edd33cb0bbc60d8d5f43c59b9431a2a6a953e3"
+        }
+      ],
+      "contentHash": "sha256:3a8b908dc04f177814d8d3177dbaee597f3e8862e99bd00d7c2eb6bbf7bb03eb"
     },
     {
       "id": "paperclipai:bundled:paperclip-operations:issue-triage",

@@ -7,6 +7,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import type { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TruncatedText } from "./TruncatedText";
+import { useTranslation } from "@/i18n";
+import { navKeyForLabel, useGuideMode } from "../lib/ui-guidance";
 
 /**
  * Forces the full-label (non-rail) presentation for any `SidebarNavItem`
@@ -70,7 +72,7 @@ interface SidebarNavItemProps {
 
 export function SidebarNavItem({
   to,
-  label,
+  label: rawLabel,
   icon: Icon,
   iconNode,
   end,
@@ -89,6 +91,11 @@ export function SidebarNavItem({
   liveAccessory,
 }: SidebarNavItemProps) {
   const { isMobile, setSidebarOpen, collapsed, peeking } = useSidebar();
+  const { t } = useTranslation();
+  const guideMode = useGuideMode();
+  const navKey = navKeyForLabel(rawLabel);
+  const label = navKey ? t(`nav.${navKey}.label`, { defaultValue: rawLabel }) : rawLabel;
+  const hint = navKey ? t(`nav.${navKey}.hint`, { defaultValue: "" }) : "";
   // A contextual takeover forces full labels even when the saved global app
   // sidebar preference is collapsed.
   const forceExpanded = useSidebarNavExpanded();
@@ -127,7 +134,8 @@ export function SidebarNavItem({
           // the sidebar edges, rounded-lg matches the card anchor, px-2 gives
           // the icon breathing room inside the pill. Rows with hover menus
           // (agents/projects) reserve extra right padding via className.
-          "flex items-center gap-2.5 mx-2 rounded-lg px-2 py-1.5 pointer-coarse:py-1 text-(length:--text-compact) font-medium transition-colors",
+          guideMode && hint && !rail ? "items-start" : "items-center",
+          "flex gap-2.5 mx-2 rounded-lg px-2 py-1.5 pointer-coarse:py-1 text-(length:--text-compact) font-medium transition-colors",
           (active ?? isActive)
             ? "bg-sidebar-accent text-sidebar-accent-foreground"
             : "text-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
@@ -168,7 +176,16 @@ export function SidebarNavItem({
           )}
         </span>
       ) : null}
-      <TruncatedText className={rail ? SIDEBAR_RAIL_HIDDEN_LABEL : cn("min-w-0 flex-1 truncate", labelClassName)}>{label}</TruncatedText>
+      {!rail && guideMode && hint ? (
+        <span className="flex min-w-0 flex-1 flex-col">
+          <TruncatedText className={cn("min-w-0 truncate", labelClassName)}>{label}</TruncatedText>
+          <span data-slot="sidebar-nav-hint" className="text-(length:--text-nano) font-normal leading-snug text-muted-foreground">
+            {hint}
+          </span>
+        </span>
+      ) : (
+        <TruncatedText className={rail ? SIDEBAR_RAIL_HIDDEN_LABEL : cn("min-w-0 flex-1 truncate", labelClassName)}>{label}</TruncatedText>
+      )}
       {!rail && trailing}
       {!rail && textBadge && (
         <Badge variant="ghost"
@@ -227,7 +244,14 @@ export function SidebarNavItem({
       <TooltipTrigger asChild>
         <div>{link}</div>
       </TooltipTrigger>
-      <TooltipContent side="right">{label}</TooltipContent>
+      <TooltipContent side="right">
+        {hint ? (
+          <span className="flex flex-col gap-0.5">
+            <span className="font-medium">{label}</span>
+            <span className="opacity-80">{hint}</span>
+          </span>
+        ) : label}
+      </TooltipContent>
     </Tooltip>
   );
 }

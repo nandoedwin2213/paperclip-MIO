@@ -64,6 +64,7 @@ import {
 } from "../lib/shell-navigation";
 import { cn } from "../lib/utils";
 import { NotFoundPage } from "../pages/NotFound";
+import { PageGuide } from "./PageGuide";
 import { PluginSlotMount, resolveRouteSidebarSlot, usePluginSlots } from "../plugins/slots";
 
 function getCompanyRouteSegment(pathname: string, companyPrefix: string | undefined): string | null {
@@ -751,6 +752,7 @@ export function Layout({ sidebarSections }: { sidebarSections?: ReactNode }) {
                 />
               ) : (
                 <RouteErrorBoundary>
+                  <PageGuide />
                   <Outlet />
                 </RouteErrorBoundary>
               )}

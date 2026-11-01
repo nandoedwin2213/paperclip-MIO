@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { useSidebarNavExpanded } from "./SidebarNavItem";
+import { useTranslation } from "@/i18n";
+import { sectionKeyForLabel } from "../lib/ui-guidance";
 
 type SidebarSectionIcon = ComponentType<{ className?: string }>;
 
@@ -88,7 +90,10 @@ function SidebarSectionHeader({
     "h-5 w-5 shrink-0 text-muted-foreground/60 transition-opacity hover:text-foreground data-[state=open]:opacity-100",
     headerControlVisibilityClassName,
   );
-  const headerContent = <span data-slot="sidebar-group-label" className={labelClassName}>{label}</span>;
+  const { t } = useTranslation();
+  const sectionKey = sectionKeyForLabel(label);
+  const displayLabel = sectionKey ? t(`nav.sections.${sectionKey}`, { defaultValue: label }) : label;
+  const headerContent = <span data-slot="sidebar-group-label" className={labelClassName}>{displayLabel}</span>;
   const HeaderActionIcon = headerAction?.icon;
 
   const headingControl = hasMenu ? (

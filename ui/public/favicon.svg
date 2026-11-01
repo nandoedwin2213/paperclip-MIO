@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <style>
-    path { stroke: #0d9488; }
+    path { stroke: #047857; }
     @media (prefers-color-scheme: dark) {
-      path { stroke: #2dd4bf; }
+      path { stroke: #34d399; }
     }
   </style>
   <path stroke-width="2.25" d="M8 3h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zM12 7.5v9M7.5 12h9"/>

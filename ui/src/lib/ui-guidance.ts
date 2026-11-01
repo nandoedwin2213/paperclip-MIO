@@ -101,12 +101,16 @@ export const PAGE_GUIDE_ROUTES = [
   "company/settings",
   "search",
   "chats",
+  "teams-catalog",
 ] as const;
 
 export function pageGuideKeyForPath(relativePath: string): string | null {
-  const normalized = relativePath.replace(/^\/+|\/+$/g, "");
+  let normalized = relativePath.replace(/^\/+|\/+$/g, "");
+  if (normalized.startsWith("inbox/")) normalized = "inbox";
+  if (normalized === "activity/costs") normalized = "costs";
+  if (normalized.startsWith("teams-catalog")) normalized = "teams-catalog";
   const match = PAGE_GUIDE_ROUTES.find(
     (route) => normalized === route || (route === "agents" && /^agents\/(all|active|paused|error)$/.test(normalized)),
   );
-  return match ? match.replace("/", "_") : null;
+  return match ? match.replace(/[/-]/g, "_") : null;
 }

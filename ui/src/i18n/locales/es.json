@@ -265,6 +265,15 @@
         "0": "Elige un agente",
         "1": "Escribe tu mensaje y pulsa Enviar"
       }
+    },
+    "teams_catalog": {
+      "title": "Catálogo de equipos",
+      "description": "Equipos de IA listos para usar. Equipos de salud: clínica, investigación clínica, salud digital y educación médica. Abre uno, revisa sus agentes e instálalo en tu organización.",
+      "buttons": {
+        "0": "Buscar equipos: filtra por nombre o categoría",
+        "1": "Tarjeta de equipo: ve agentes, roles y habilidades requeridas",
+        "2": "Instalar equipo: agrega sus agentes a tu organización"
+      }
     }
   },
   "ui": {

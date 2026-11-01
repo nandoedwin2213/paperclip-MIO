@@ -31,7 +31,7 @@ describe("ui guidance", () => {
 
   it("has a bilingual page guide with button explanations for every guided route", () => {
     for (const route of PAGE_GUIDE_ROUTES) {
-      const key = route.replace("/", "_");
+      const key = route.replace(/[/-]/g, "_");
       for (const messages of [en, es]) {
         const guide = (messages.guide as unknown as Record<string, { title: string; description: string; buttons: Record<string, string> }>)[key];
         expect(guide?.title, `${route} title`).toBeTruthy();

@@ -265,6 +265,15 @@
         "0": "Pick an agent",
         "1": "Write your message and press Send"
       }
+    },
+    "teams_catalog": {
+      "title": "Teams catalog",
+      "description": "Ready-made AI teams. Health teams: clinic, clinical research, digital health and medical education. Open one, review its agents and install it in your organization.",
+      "buttons": {
+        "0": "Search teams: filter by name or category",
+        "1": "Team card: see agents, roles and required skills",
+        "2": "Install team: adds its agents to your organization"
+      }
     }
   },
   "ui": {

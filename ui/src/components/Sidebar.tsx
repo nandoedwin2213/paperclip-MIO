@@ -23,8 +23,7 @@ import {
   MessageCircle,
   GanttChartSquare,
   LayoutGrid,
-  Users,
-} from "lucide-react";
+  Users, HeartPulse } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SidebarSection } from "./SidebarSection";
@@ -295,6 +294,7 @@ function ClassicSidebar({ children }: { children?: ReactNode }) {
           >
             <SidebarNavItem to="/agents" label="Agents" icon={Users} />
             <SidebarNavItem to="/skills" label="Skills" icon={Boxes} />
+            <SidebarNavItem to="/teams-catalog" label="Teams" icon={HeartPulse} />
             <SidebarNavItem to="/apps" label="Connectors" icon={Unplug} />
             <SidebarNavItem to="/activity" label="Audit" icon={History} />
           </SidebarSection>

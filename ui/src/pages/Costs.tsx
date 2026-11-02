@@ -45,6 +45,7 @@ import { billingTypeDisplayName, cn, formatCents, formatTokens, providerDisplayN
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { tx } from "@/i18n/phrases";
 
 const NO_COMPANY = "__none__";
 export type CostsMainTab = "overview" | "budgets" | "providers" | "billers" | "finance" | "decisions" | "fast-responses";
@@ -135,34 +136,34 @@ function FinanceSummaryCard({
   return (
     <Card>
       <CardHeader className="px-5 pt-5 pb-2">
-        <CardTitle className="text-base">Finance ledger</CardTitle>
+        <CardTitle className="text-base">{tx("Finance ledger")}</CardTitle>
         <CardDescription>
-          Account-level charges that do not map to a single inference request.
+          {tx("Account-level charges that do not map to a single inference request.")}
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3 px-5 pb-5 pt-2 sm:grid-cols-2 xl:grid-cols-4">
         <MetricTile
-          label="Debits"
+          label={tx("Debits")}
           value={formatCents(debitCents)}
           subtitle={`${eventCount} total event${eventCount === 1 ? "" : "s"} in range`}
           icon={ArrowUpRight}
         />
         <MetricTile
-          label="Credits"
+          label={tx("Credits")}
           value={formatCents(creditCents)}
-          subtitle="Refunds, offsets, and credit returns"
+          subtitle={tx("Refunds, offsets, and credit returns")}
           icon={ArrowDownLeft}
         />
         <MetricTile
-          label="Net"
+          label={tx("Net")}
           value={formatCents(netCents)}
-          subtitle="Debit minus credit for the selected period"
+          subtitle={tx("Debit minus credit for the selected period")}
           icon={ReceiptText}
         />
         <MetricTile
-          label="Estimated"
+          label={tx("Estimated")}
           value={formatCents(estimatedDebitCents)}
-          subtitle="Estimated debits that are not yet invoice-authoritative"
+          subtitle={tx("Estimated debits that are not yet invoice-authoritative")}
           icon={Coins}
         />
       </CardContent>
@@ -539,7 +540,7 @@ export function Costs({
         value: "all",
         label: (
           <span className="flex items-center gap-1.5">
-            <span>All providers</span>
+            <span>{tx("All providers")}</span>
             {providerKeys.length > 0 ? (
               <>
                 <span className="font-mono text-xs text-muted-foreground">{formatTokens(allTokens)}</span>
@@ -571,7 +572,7 @@ export function Costs({
         value: "all",
         label: (
           <span className="flex items-center gap-1.5">
-            <span>All billers</span>
+            <span>{tx("All billers")}</span>
             {billerKeys.length > 0 ? (
               <>
                 <span className="font-mono text-xs text-muted-foreground">{formatTokens(allTokens)}</span>
@@ -598,7 +599,7 @@ export function Costs({
   }), [budgetPolicies]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={DollarSign} message="Select an organization to view costs." />;
+    return <EmptyState icon={DollarSign} message={tx("Select an organization to view costs.")} />;
   }
 
   const showCustomPrompt = preset === "custom" && !customReady;
@@ -607,7 +608,7 @@ export function Costs({
   return (
     <div className="space-y-6">
       {scopedAgentError && (
-        <p role="alert" className="text-sm text-destructive">Could not load agent details. Totals below show recorded organization costs.</p>
+        <p role="alert" className="text-sm text-destructive">{tx("Could not load agent details. Totals below show recorded organization costs.")}</p>
       )}
       {museUsageUnavailable && (
         <p role="status" className="text-sm text-muted-foreground">
@@ -619,9 +620,9 @@ export function Costs({
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
               {embedded ? (
-                <h2 className="text-lg font-semibold text-foreground">Costs</h2>
+                <h2 className="text-lg font-semibold text-foreground">{tx("Costs")}</h2>
               ) : (
-                <h1 className="text-3xl font-semibold tracking-tight">Costs</h1>
+                <h1 className="text-3xl font-semibold tracking-tight">{tx("Costs")}</h1>
               )}
             </div>
 
@@ -665,7 +666,7 @@ export function Costs({
           )}
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
             <MetricTile
-              label="API spend"
+              label={tx("API spend")}
               value={subscriptions ? subscriptions.api.unpricedEventCount === subscriptions.api.eventCount && subscriptions.api.eventCount > 0 ? "—" : formatCents(Number(subscriptions.api.costCents)) : "—"}
               subtitle={subscriptions ? <div className="space-y-1">
                 <CostEstimateLabel eventCount={subscriptions.api.eventCount} estimatedEventCount={subscriptions.api.estimatedEventCount} />
@@ -675,7 +676,7 @@ export function Costs({
             />
             <SubscriptionCostCard key={companyId} companyId={companyId} report={subscriptions} error={subscriptionError} onChanged={invalidateSubscriptions} />
             <MetricTile
-              label="Budget"
+              label={tx("Budget")}
               value={activeBudgetIncidents.length > 0 ? String(activeBudgetIncidents.length) : (
                 spendData?.summary.budgetCents && spendData.summary.budgetCents > 0
                   ? preset === "mtd" ? `${spendData.summary.utilizationPercent}%` : formatCents(spendData.summary.budgetCents)
@@ -691,7 +692,7 @@ export function Costs({
               icon={Coins}
             />
             <MetricTile
-              label="Recorded charges"
+              label={tx("Recorded charges")}
               value={financeData ? formatCents(financeData.summary.netCents) : "—"}
               subtitle={financeData ? (
                 <>
@@ -702,7 +703,7 @@ export function Costs({
               icon={ReceiptText}
             />
             <MetricTile
-              label="Finance events"
+              label={tx("Finance events")}
               value={financeData ? String(financeData.summary.eventCount) : "—"}
               subtitle={financeData ? `${formatCents(financeData.summary.estimatedDebitCents)} estimated in range` : "Financial data unavailable"}
               icon={ArrowUpRight}
@@ -714,7 +715,7 @@ export function Costs({
           {discoverSubscriptions.error && <div role="status" className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <p>Connected accounts could not be checked. Existing subscription estimates are still shown.</p>
             {subscriptions?.canRefresh && <Button variant="outline" size="sm" disabled={discoverSubscriptions.isPending}
-              onClick={() => discoverSubscriptions.mutate(companyId)}>Retry account check</Button>}
+              onClick={() => discoverSubscriptions.mutate(companyId)}>{tx("Retry account check")}</Button>}
           </div>}
           {mainTab === "overview" && spendData && (spendData.summary.unpricedEventCount > 0 || spendData.summary.pendingRunCount > 0 || (spendData.summary.unknownBillingEventCount ?? 0) > 0) && (
             <CostDataQualityNotice key={`${companyId}:${reportQueryFrom}:${reportQueryTo}`} companyId={companyId}
@@ -727,12 +728,12 @@ export function Costs({
 
       {budgetError && !budgetData ? (
         <p role="status" className="text-sm text-muted-foreground">
-          Budget data could not be loaded. Please try again shortly.
+          {tx("Budget data could not be loaded. Please try again shortly.")}
         </p>
       ) : null}
       {((spendData && spendError) || (financeData && financeError) || (budgetData && budgetError) || providerError || billerError || weekError || weekBillerError || windowError) ? (
         <p role="status" className="text-sm text-muted-foreground">
-          Showing the last loaded data. Updates will resume automatically.
+          {tx("Showing the last loaded data. Updates will resume automatically.")}
         </p>
       ) : null}
 
@@ -741,37 +742,37 @@ export function Costs({
         {!lockTab ? (
           <div className="max-w-full overflow-x-auto pb-2">
             <TabsList variant="line" className="justify-start">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              {!hideBudgetsTab ? <TabsTrigger value="budgets">Budgets</TabsTrigger> : null}
-              <TabsTrigger value="providers">Providers</TabsTrigger>
-              <TabsTrigger value="billers">Billers</TabsTrigger>
-              <TabsTrigger value="finance">Finance</TabsTrigger>
-              <TabsTrigger value="decisions">Decisions</TabsTrigger>
-              <TabsTrigger value="fast-responses">Fast responses</TabsTrigger>
+              <TabsTrigger value="overview">{tx("Overview")}</TabsTrigger>
+              {!hideBudgetsTab ? <TabsTrigger value="budgets">{tx("Budgets")}</TabsTrigger> : null}
+              <TabsTrigger value="providers">{tx("Providers")}</TabsTrigger>
+              <TabsTrigger value="billers">{tx("Billers")}</TabsTrigger>
+              <TabsTrigger value="finance">{tx("Finance")}</TabsTrigger>
+              <TabsTrigger value="decisions">{tx("Decisions")}</TabsTrigger>
+              <TabsTrigger value="fast-responses">{tx("Fast responses")}</TabsTrigger>
             </TabsList>
           </div>
         ) : null}
 
-        <TabsContent value="fast-responses" className="mt-4">{showCustomPrompt ? <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p> : <FastResponseHistory companyId={companyId} from={from} to={to} />}</TabsContent>
-        <TabsContent value="decisions" className="mt-4">{showCustomPrompt ? <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p> : <DecisionHistory companyId={companyId} from={from} to={to} />}</TabsContent>
+        <TabsContent value="fast-responses" className="mt-4">{showCustomPrompt ? <p className="text-sm text-muted-foreground">{tx("Select a start and end date to load data.")}</p> : <FastResponseHistory companyId={companyId} from={from} to={to} />}</TabsContent>
+        <TabsContent value="decisions" className="mt-4">{showCustomPrompt ? <p className="text-sm text-muted-foreground">{tx("Select a start and end date to load data.")}</p> : <DecisionHistory companyId={companyId} from={from} to={to} />}</TabsContent>
         <TabsContent value="overview" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{tx("Select a start and end date to load data.")}</p>
           ) : showOverviewLoading ? (
             <PageSkeleton variant="costs" />
           ) : overviewError ? (
-            <p className="text-sm text-destructive">Cost data could not be loaded. Please try again shortly.</p>
+            <p className="text-sm text-destructive">{tx("Cost data could not be loaded. Please try again shortly.")}</p>
           ) : (
             <>
               <div className="grid gap-4 xl:grid-cols-(--gtc-32)">
                 <div className="min-w-0 space-y-4">
                   <Card className="gap-3 py-4">
                     <CardHeader className="gap-0 px-5">
-                      <CardTitle className="text-base">By agent</CardTitle>
+                      <CardTitle className="text-base">{tx("By agent")}</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 px-5">
                       {(spendData?.byAgent.length ?? 0) === 0 ? (
-                        <p className="text-sm text-muted-foreground">No cost events yet.</p>
+                        <p className="text-sm text-muted-foreground">{tx("No cost events yet.")}</p>
                       ) : (
                         spendData?.byAgent.map((row) => {
                           const modelRows = agentModelRows.get(row.agentId) ?? [];
@@ -791,7 +792,7 @@ export function Costs({
                                   ) : (
                                     <span className="h-3 w-3 shrink-0" />
                                   )}
-                                  {row.agentId ? <AgentIdentity agent={{ id: row.agentId, name: row.agentName ?? row.agentId, appearance: row.agentAppearance }} size="sm" /> : <span className="font-medium">Paperclip services</span>}
+                                  {row.agentId ? <AgentIdentity agent={{ id: row.agentId, name: row.agentName ?? row.agentId, appearance: row.agentAppearance }} size="sm" /> : <span className="font-medium">{tx("Paperclip services")}</span>}
                                   {row.agentStatus === "terminated" ? <StatusBadge status="terminated" /> : null}
                                 </div>
                                 <div className="text-right text-sm tabular-nums">
@@ -864,11 +865,11 @@ export function Costs({
                 <div className="space-y-4">
                   <Card className="gap-3 py-4">
                     <CardHeader className="gap-0 px-5">
-                      <CardTitle className="text-base">By project</CardTitle>
+                      <CardTitle className="text-base">{tx("By project")}</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 px-5">
                       {(spendData?.byProject.length ?? 0) === 0 ? (
-                        <p className="text-sm text-muted-foreground">No project-attributed run costs yet.</p>
+                        <p className="text-sm text-muted-foreground">{tx("No project-attributed run costs yet.")}</p>
                       ) : (
                         spendData?.byProject.map((row, index) => (
                           <div
@@ -923,41 +924,41 @@ export function Costs({
         </TabsContent>
 
         <TabsContent value="budgets" className="mt-4 space-y-4">
-          {policyMutation.error && <p role="alert" className="text-sm text-destructive">Could not update the budget policy. Review your settings and try again.</p>}
+          {policyMutation.error && <p role="alert" className="text-sm text-destructive">{tx("Could not update the budget policy. Review your settings and try again.")}</p>}
           {budgetLoading ? (
             <PageSkeleton variant="costs" />
           ) : budgetError && !budgetData ? null : (
             <>
               <Card className="border-border/70 bg-(image:--gradient-extract-2)">
                 <CardHeader className="px-5 pt-5 pb-3">
-                  <CardTitle className="text-base">Budget control plane</CardTitle>
+                  <CardTitle className="text-base">{tx("Budget control plane")}</CardTitle>
                   <CardDescription>
                     Hard-stop spend limits for agents and projects. Provider subscription quota stays separate and appears under Providers.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-3 px-5 pb-5 pt-0 md:grid-cols-4">
                   <MetricTile
-                    label="Active incidents"
+                    label={tx("Active incidents")}
                     value={String(activeBudgetIncidents.length)}
-                    subtitle="Open soft or hard threshold crossings"
+                    subtitle={tx("Open soft or hard threshold crossings")}
                     icon={ReceiptText}
                   />
                   <MetricTile
-                    label="Pending approvals"
+                    label={tx("Pending approvals")}
                     value={String(budgetData?.pendingApprovalCount ?? 0)}
-                    subtitle="Budget override approvals awaiting board action"
+                    subtitle={tx("Budget override approvals awaiting board action")}
                     icon={ArrowUpRight}
                   />
                   <MetricTile
-                    label="Paused agents"
+                    label={tx("Paused agents")}
                     value={String(budgetData?.pausedAgentCount ?? 0)}
-                    subtitle="Agent heartbeats blocked by budget"
+                    subtitle={tx("Agent heartbeats blocked by budget")}
                     icon={Coins}
                   />
                   <MetricTile
-                    label="Paused projects"
+                    label={tx("Paused projects")}
                     value={String(budgetData?.pausedProjectCount ?? 0)}
-                    subtitle="Project execution blocked by budget"
+                    subtitle={tx("Project execution blocked by budget")}
                     icon={DollarSign}
                   />
                 </CardContent>
@@ -966,7 +967,7 @@ export function Costs({
               {activeBudgetIncidents.length > 0 ? (
                 <div className="space-y-3">
                   <div>
-                    <h2 className="text-lg font-semibold">Active incidents</h2>
+                    <h2 className="text-lg font-semibold">{tx("Active incidents")}</h2>
                     <p className="text-sm text-muted-foreground">
                       Raise the budget or keep a hard stop paused. Dismiss a warning when no action is needed.
                     </p>
@@ -1037,7 +1038,7 @@ export function Costs({
 
         <TabsContent value="providers" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{tx("Select a start and end date to load data.")}</p>
           ) : (
             <>
               <Tabs value={effectiveProvider} onValueChange={setActiveProvider}>
@@ -1045,7 +1046,7 @@ export function Costs({
 
                 <TabsContent value="all" className="mt-4">
                   {providers.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">No cost events in this period.</p>
+                    <p className="text-sm text-muted-foreground">{tx("No cost events in this period.")}</p>
                   ) : (
                     <div className="grid gap-4 md:grid-cols-2">
                       {providers.map((provider) => (
@@ -1098,7 +1099,7 @@ export function Costs({
 
         <TabsContent value="billers" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{tx("Select a start and end date to load data.")}</p>
           ) : (
             <>
               <Tabs value={effectiveBiller} onValueChange={setActiveBiller}>
@@ -1106,7 +1107,7 @@ export function Costs({
 
                 <TabsContent value="all" className="mt-4">
                   {billers.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">No billable events in this period.</p>
+                    <p className="text-sm text-muted-foreground">{tx("No billable events in this period.")}</p>
                   ) : (
                     <div className="grid gap-4 md:grid-cols-2">
                       {billers.map((biller) => {
@@ -1155,11 +1156,11 @@ export function Costs({
           {financeData?.summary.providerReportedCentsExact !== undefined && <p className="text-sm text-muted-foreground">Provider API cost reports: {formatCents(financeData.summary.providerReportedCents ?? 0)}. Report totals overlap invoices and run estimates and are shown separately from recorded charges.</p>}
 
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{tx("Select a start and end date to load data.")}</p>
           ) : financeLoading ? (
             <PageSkeleton variant="costs" />
           ) : financeError && !financeData ? (
-            <p className="text-sm text-destructive">Financial events could not be loaded. Please try again shortly.</p>
+            <p className="text-sm text-destructive">{tx("Financial events could not be loaded. Please try again shortly.")}</p>
           ) : (
             <>
               <FinanceSummaryCard
@@ -1174,12 +1175,12 @@ export function Costs({
                 <div className="space-y-4">
                   <Card>
                     <CardHeader className="px-5 pt-5 pb-2">
-                      <CardTitle className="text-base">By biller</CardTitle>
-                      <CardDescription>Account-level financial events grouped by who charged or credited them.</CardDescription>
+                      <CardTitle className="text-base">{tx("By biller")}</CardTitle>
+                      <CardDescription>{tx("Account-level financial events grouped by who charged or credited them.")}</CardDescription>
                     </CardHeader>
                     <CardContent className="grid gap-4 px-5 pb-5 pt-2 md:grid-cols-2">
                       {(financeData?.byBiller.length ?? 0) === 0 ? (
-                        <p className="text-sm text-muted-foreground">No finance events yet.</p>
+                        <p className="text-sm text-muted-foreground">{tx("No finance events yet.")}</p>
                       ) : (
                         financeData?.byBiller.map((row) => <FinanceBillerCard key={`${row.biller}:${row.currency}`} row={row} />)
                       )}

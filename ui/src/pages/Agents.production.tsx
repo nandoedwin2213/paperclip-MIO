@@ -27,6 +27,7 @@ import { AGENT_ROLE_LABELS, type Agent, type Environment, type EnvironmentCapabi
 import { usePublishSharedQueryData, useSharedPollingQuery } from "../hooks/useSharedPolling";
 
 import { getAdapterLabel } from "../adapters/adapter-display-registry";
+import { tx } from "@/i18n/phrases";
 
 const roleLabels = AGENT_ROLE_LABELS as Record<string, string>;
 
@@ -305,7 +306,7 @@ export function Agents() {
   }, [navigate, requestedTab]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Bot} message="Select a company to view agents." />;
+    return <EmptyState icon={Bot} message={tx("Select a company to view agents.")} />;
   }
 
   if (isLoading) {
@@ -345,7 +346,7 @@ export function Agents() {
               variant="outline"
               onClick={() => setConfigureState(builtInState)}
             >
-              Set up
+              {tx("Set up")}
             </Button>
           </span>
         )}
@@ -368,7 +369,7 @@ export function Agents() {
         to={agentUrl(agent)}
         className="group"
         leading={hasInvalidOrgChain ? (
-          <AlertTriangle className="h-3.5 w-3.5 text-amber-500" aria-label="Invalid reporting chain" />
+          <AlertTriangle className="h-3.5 w-3.5 text-amber-500" aria-label={tx("Invalid reporting chain")} />
         ) : (
           <AgentAvatar agent={agent} size={32} />
         )}
@@ -380,7 +381,7 @@ export function Agents() {
             {showEnvironmentColumn && <span className="text-xs text-muted-foreground" title={resolveRenderedEnvironment(agent.id).title}>
               {resolveRenderedEnvironment(agent.id).label} · {resolveRenderedEnvironment(agent.id).detail}
             </span>}
-            {agent.lastHeartbeatAt && <span className="text-xs text-muted-foreground" title="Last heartbeat">{relativeTime(agent.lastHeartbeatAt)}</span>}
+            {agent.lastHeartbeatAt && <span className="text-xs text-muted-foreground" title={tx("Last heartbeat")}>{relativeTime(agent.lastHeartbeatAt)}</span>}
           </div>
         )}
         trailing={
@@ -409,15 +410,15 @@ export function Agents() {
         <div className="flex items-center gap-2">
           {/* View toggle */}
           {!forceListView && (
-            <div className="flex items-center border border-border" role="group" aria-label="View mode">
+            <div className="flex items-center border border-border" role="group" aria-label={tx("View mode")}>
               <button
                 className={cn(
                   "p-1.5 transition-colors",
                   effectiveView === "list" ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent/50"
                 )}
                 onClick={() => setView("list")}
-                title="List view"
-                aria-label="List view"
+                title={tx("List view")}
+                aria-label={tx("List view")}
                 aria-pressed={effectiveView === "list"}
               >
                 <List className="h-3.5 w-3.5" />
@@ -428,8 +429,8 @@ export function Agents() {
                   effectiveView === "org" ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent/50"
                 )}
                 onClick={() => setView("org")}
-                title="Org chart view"
-                aria-label="Org chart view"
+                title={tx("Org chart view")}
+                aria-label={tx("Org chart view")}
                 aria-pressed={effectiveView === "org"}
               >
                 <GitBranch className="h-3.5 w-3.5" />
@@ -438,7 +439,7 @@ export function Agents() {
           )}
           <Button size="sm" variant="outline" onClick={openNewAgent}>
             <Plus className="h-3.5 w-3.5 mr-1.5" />
-            New Agent
+            {tx("New Agent")}
           </Button>
         </div>
       </div>
@@ -452,8 +453,8 @@ export function Agents() {
       {agents && agents.length === 0 && (
         <EmptyState
           icon={Bot}
-          message="Create your first agent to get started."
-          action="New Agent"
+          message={tx("Create your first agent to get started.")}
+          action={tx("New Agent")}
           onAction={openNewAgent}
         />
       )}
@@ -489,13 +490,13 @@ export function Agents() {
 
       {effectiveView === "org" && orgTree && orgTree.length > 0 && filteredOrg.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-8">
-          No agents match the selected status.
+          {tx("No agents match the selected status.")}
         </p>
       )}
 
       {effectiveView === "org" && orgTree && orgTree.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-8">
-          No organizational hierarchy defined.
+          {tx("No organizational hierarchy defined.")}
         </p>
       )}
       {configureState && selectedCompanyId && (
@@ -547,7 +548,7 @@ function OrgTreeNode({
         className="group flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-accent/50 transition-colors w-full text-left no-underline text-inherit"
       >
         {hasInvalidOrgChain ? (
-          <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" aria-label="Invalid reporting chain" />
+          <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" aria-label={tx("Invalid reporting chain")} />
         ) : (
           <AgentAvatar agent={agent ?? node} size={24} />
         )}
@@ -573,7 +574,7 @@ function OrgTreeNode({
                   }}
                 >
                   <Button size="xs" variant="outline" onClick={() => onConfigureBuiltIn(builtInState)}>
-                    Set up
+                    {tx("Set up")}
                   </Button>
                 </span>
               )}

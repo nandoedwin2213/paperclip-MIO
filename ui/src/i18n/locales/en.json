@@ -2,8 +2,303 @@
   "app": {
     "noCompanies": {
       "title": "Create your first organization",
-      "description": "Get started by creating an organization.",
+      "description": "Start by creating your clinic, practice or health project.",
       "newCompany": "New Organization"
     }
+  },
+  "brand": {
+    "name": "Galeno IA",
+    "tagline": "AI teams for health projects"
+  },
+  "nav": {
+    "newTask": {
+      "label": "New Task",
+      "hint": "Create a task and assign it to an agent or a person"
+    },
+    "search": {
+      "label": "Search",
+      "hint": "Find tasks, agents, projects and documents"
+    },
+    "dashboard": {
+      "label": "Dashboard",
+      "hint": "Overview: live agents, task progress and costs"
+    },
+    "inbox": {
+      "label": "Inbox",
+      "hint": "What needs your attention: replies, failures and reviews"
+    },
+    "chats": {
+      "label": "Chat",
+      "hint": "Talk directly with your agents"
+    },
+    "decisions": {
+      "label": "Decisions",
+      "hint": "Approvals and choices waiting for you"
+    },
+    "status": {
+      "label": "Status",
+      "hint": "Status cards for each area of work"
+    },
+    "boardChat": {
+      "label": "Conference Room",
+      "hint": "Group conversation with the whole team"
+    },
+    "issues": {
+      "label": "Tasks",
+      "hint": "All work items, their owner and their status"
+    },
+    "projects": {
+      "label": "Projects",
+      "hint": "Group tasks by health program or initiative"
+    },
+    "routines": {
+      "label": "Routines",
+      "hint": "Recurring work on a schedule (daily, weekly…)"
+    },
+    "artifacts": {
+      "label": "Artifacts",
+      "hint": "Files and documents your agents produced"
+    },
+    "cases": {
+      "label": "Cases",
+      "hint": "Multi-step workflows handed between agents"
+    },
+    "goals": {
+      "label": "Goals",
+      "hint": "Big objectives that give tasks their purpose"
+    },
+    "workspaces": {
+      "label": "Workspaces",
+      "hint": "Isolated folders where agents work on code"
+    },
+    "agents": {
+      "label": "Agents",
+      "hint": "Your AI team: roles, models and status"
+    },
+    "skills": {
+      "label": "Skills",
+      "hint": "Know-how you teach agents (protocols, guides)"
+    },
+    "apps": {
+      "label": "Connectors",
+      "hint": "Connect services like Gmail, GitHub or Notion"
+    },
+    "activity": {
+      "label": "Activity",
+      "hint": "Audit log of every change and who made it"
+    },
+    "audit": {
+      "label": "Audit",
+      "hint": "Audit log of every change and who made it"
+    },
+    "org": {
+      "label": "Org",
+      "hint": "Org chart: who reports to whom"
+    },
+    "timeline": {
+      "label": "Timeline",
+      "hint": "Calendar view of tasks and runs"
+    },
+    "costs": {
+      "label": "Costs",
+      "hint": "Spending per agent and budgets with limits"
+    },
+    "commentary": {
+      "label": "Commentary",
+      "hint": "Narrated summary of what agents did"
+    },
+    "settings": {
+      "label": "Settings",
+      "hint": "Organization name, members, secrets and options"
+    },
+    "teams": {
+      "label": "Teams",
+      "hint": "Install ready-made teams (including health teams)"
+    },
+    "sections": {
+      "work": "Work",
+      "org": "Org",
+      "organization": "Organization",
+      "projects": "Projects",
+      "agents": "Agents"
+    }
+  },
+  "guide": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Your organization at a glance: which agents are working now, how tasks are progressing, and how much you are spending.",
+      "buttons": {
+        "0": "New Task: create work for an agent",
+        "1": "Charts: activity of the last 14 days",
+        "2": "Recent tasks: open one to see its conversation"
+      }
+    },
+    "inbox": {
+      "title": "Inbox",
+      "description": "Everything that needs a human: agent questions, failed runs and work ready for review.",
+      "buttons": {
+        "0": "Open an item to reply or approve",
+        "1": "Mark as read to clear it",
+        "2": "Filters: show only what matters now"
+      }
+    },
+    "issues": {
+      "title": "Tasks",
+      "description": "Each task has one owner (agent or person), a status and a conversation. Example: “Draft the patient consent form for the new laser treatment”.",
+      "buttons": {
+        "0": "New Task: describe the work and choose who does it",
+        "1": "Status: backlog → to do → in progress → review → done",
+        "2": "Group / Sort / Columns: change how the list looks"
+      }
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Group related tasks under one health program, e.g. “Diabetes education campaign” or “Clinic website”.",
+      "buttons": {
+        "0": "New Project: create a program with a lead agent",
+        "1": "Open a project to see its tasks and progress",
+        "2": "Star a project to pin it in the menu"
+      }
+    },
+    "routines": {
+      "title": "Routines",
+      "description": "Work that repeats automatically on a schedule, e.g. a weekly report of appointments or a monthly compliance review.",
+      "buttons": {
+        "0": "New Routine: choose the agent, the instructions and the schedule",
+        "1": "Pause / Resume: stop or restart a routine",
+        "2": "Run now: execute it once immediately"
+      }
+    },
+    "artifacts": {
+      "title": "Artifacts",
+      "description": "Documents, images and files produced by agents. Review them before using them with patients.",
+      "buttons": {
+        "0": "Open a file to preview it",
+        "1": "Comment on a passage to request changes",
+        "2": "Download to use it outside the app"
+      }
+    },
+    "agents": {
+      "title": "Agents",
+      "description": "Your AI team. Each agent has a role (e.g. Medical Director, Patient Coordinator), a model (Claude, Gemini, GPT…) and a budget.",
+      "buttons": {
+        "0": "New Agent: hire a new team member",
+        "1": "Pause / Resume: stop an agent at any time",
+        "2": "Open an agent to edit instructions, skills and runs"
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "description": "Reusable know-how for agents: clinical protocols, writing guides, privacy rules. Install health skills from the catalog.",
+      "buttons": {
+        "0": "Install: add a skill from the catalog",
+        "1": "Studio: write or edit your own skill",
+        "2": "Assign: give a skill to specific agents"
+      }
+    },
+    "apps": {
+      "title": "Connectors",
+      "description": "Connect external services so agents can use them. Each action can be Allowed, Ask first or Off.",
+      "buttons": {
+        "0": "Connect: link a new service",
+        "1": "Permissions: choose what agents may do",
+        "2": "Disconnect: remove access at any time"
+      }
+    },
+    "activity": {
+      "title": "Activity",
+      "description": "Audit trail: every change, who made it and when. Useful for clinical governance and compliance.",
+      "buttons": {
+        "0": "Filter by agent, person or type",
+        "1": "Open an entry to see the details",
+        "2": "Export when an auditor asks for it"
+      }
+    },
+    "org": {
+      "title": "Org chart",
+      "description": "Who reports to whom. The lead agent delegates work down the chart.",
+      "buttons": {
+        "0": "Zoom in / out to explore",
+        "1": "Click an agent to open it",
+        "2": "Drag to move around"
+      }
+    },
+    "costs": {
+      "title": "Costs",
+      "description": "Money spent by each agent and budgets. When a budget limit is reached, the agent pauses automatically.",
+      "buttons": {
+        "0": "Date range: choose the period",
+        "1": "Budgets: set monthly limits per agent or project",
+        "2": "Incidents: limits that were crossed"
+      }
+    },
+    "goals": {
+      "title": "Goals",
+      "description": "High-level objectives, e.g. “Reduce no-shows by 20%”. Tasks and projects link to a goal so agents know why.",
+      "buttons": {
+        "0": "New Goal: write the objective",
+        "1": "Link projects and tasks to a goal",
+        "2": "Track progress over time"
+      }
+    },
+    "company_settings": {
+      "title": "Settings",
+      "description": "Organization details, members, secrets (API keys) and advanced options.",
+      "buttons": {
+        "0": "Members: invite your team",
+        "1": "Secrets: store API keys safely",
+        "2": "Teams catalog: install health teams"
+      }
+    },
+    "search": {
+      "title": "Search",
+      "description": "Find anything in your organization.",
+      "buttons": {
+        "0": "Type a word and press Enter",
+        "1": "Open a result to go to it"
+      }
+    },
+    "chats": {
+      "title": "Chat",
+      "description": "Direct conversations with your agents.",
+      "buttons": {
+        "0": "Pick an agent",
+        "1": "Write your message and press Send"
+      }
+    },
+    "teams_catalog": {
+      "title": "Teams catalog",
+      "description": "Ready-made AI teams. Health teams: clinic, clinical research, digital health and medical education. Open one, review its agents and install it in your organization.",
+      "buttons": {
+        "0": "Search teams: filter by name or category",
+        "1": "Team card: see agents, roles and required skills",
+        "2": "Install team: adds its agents to your organization"
+      }
+    }
+  },
+  "ui": {
+    "language": "Language",
+    "helpMode": "Guide mode",
+    "helpModeOn": "Explanations on",
+    "helpModeOff": "Explanations off",
+    "buttonsHere": "Buttons on this page",
+    "healthNotice": "Health data: agents must not receive identifiable patient data unless your setup complies with your local law (e.g. LOPDP Ecuador, HIPAA, GDPR)."
+  },
+  "onboarding": {
+    "orgTitle": "What is the name of your organization?",
+    "orgHint": "Use the name of your clinic, practice, hospital, lab or health project.",
+    "agentTitle": "Create your first agent",
+    "connectTitle": "Connect a model",
+    "getStarted": "Let's get started...",
+    "name": "Name",
+    "orgPlaceholder": "e.g. Northwind Labs",
+    "agentName": "Agent name",
+    "agentHint": "Your first agent leads the team, e.g. a Medical Director or a Clinic Manager.",
+    "agentPlaceholder": "e.g. Chief of staff",
+    "worksWith": "Galeno IA works with your subscription or API keys.",
+    "firstAgent": "Your first agent",
+    "ready": "{{name}} is ready to work!",
+    "continue": "Continue",
+    "next": "Next"
   }
 }

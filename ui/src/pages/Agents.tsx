@@ -43,6 +43,7 @@ const ConfigureBuiltInAgentModal = lazy(() =>
 );
 
 import { AGENT_FILTER_TABS } from "../lib/agent-filter-tabs";
+import { tx } from "@/i18n/phrases";
 export { AGENT_FILTER_TABS } from "../lib/agent-filter-tabs";
 type FilterTab = (typeof AGENT_FILTER_TABS)[number];
 
@@ -319,7 +320,7 @@ export function Agents({ initialView = "list" }: { initialView?: AgentsView } = 
   }, [navigate, requestedTab]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Bot} message="Select an organization to view agents." />;
+    return <EmptyState icon={Bot} message={tx("Select an organization to view agents.")} />;
   }
 
   if (isLoading) {
@@ -357,7 +358,7 @@ export function Agents({ initialView = "list" }: { initialView?: AgentsView } = 
               variant="outline"
               onClick={() => setConfigureState(builtInState)}
             >
-              Set up
+              {tx("Set up")}
             </Button>
           </span>
         )}
@@ -375,7 +376,7 @@ export function Agents({ initialView = "list" }: { initialView?: AgentsView } = 
         to={agentUrl(agent)}
         className="group py-3"
         leading={hasInvalidOrgChain ? (
-          <AlertTriangle className="h-3.5 w-3.5 text-amber-500" aria-label="Invalid reporting chain" />
+          <AlertTriangle className="h-3.5 w-3.5 text-amber-500" aria-label={tx("Invalid reporting chain")} />
         ) : (
           <AgentAvatar agent={agent} size={32} />
         )}
@@ -387,12 +388,12 @@ export function Agents({ initialView = "list" }: { initialView?: AgentsView } = 
             {showEnvironmentColumn && <span className="text-xs text-muted-foreground" title={resolveRenderedEnvironment(agent.id).title}>
               {resolveRenderedEnvironment(agent.id).label} · {resolveRenderedEnvironment(agent.id).detail}
             </span>}
-            {agent.lastHeartbeatAt && <span className="text-xs text-muted-foreground" title="Last heartbeat">{relativeTime(agent.lastHeartbeatAt)}</span>}
+            {agent.lastHeartbeatAt && <span className="text-xs text-muted-foreground" title={tx("Last heartbeat")}>{relativeTime(agent.lastHeartbeatAt)}</span>}
           </div>
         )}
         trailing={
           <div className="flex items-center gap-3">
-            {agentChat.enabled && <Button variant="ghost" size="sm" onClick={event => { event.preventDefault(); event.stopPropagation(); navigate(`/chats/${agentRouteRef(agent)}`); }}>Chat</Button>}
+            {agentChat.enabled && <Button variant="ghost" size="sm" onClick={event => { event.preventDefault(); event.stopPropagation(); navigate(`/chats/${agentRouteRef(agent)}`); }}>{tx("Chat")}</Button>}
             <div className="hidden sm:flex items-center gap-3">
               {liveRunByAgent.has(agent.id) && (
                 <LiveRunIndicator
@@ -425,8 +426,8 @@ export function Agents({ initialView = "list" }: { initialView?: AgentsView } = 
       {agents && agents.length === 0 && (
         <EmptyState
           icon={Bot}
-          message="Create your first agent to get started."
-          action="New Agent"
+          message={tx("Create your first agent to get started.")}
+          action={tx("New Agent")}
           onAction={openNewAgent}
         />
       )}
@@ -447,13 +448,13 @@ export function Agents({ initialView = "list" }: { initialView?: AgentsView } = 
 
       {effectiveView === "org" && orgTree && orgTree.length > 0 && filteredOrg.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-8">
-          No agents match your search and selected status.
+          {tx("No agents match your search and selected status.")}
         </p>
       )}
 
       {effectiveView === "org" && orgTree && orgTree.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-8">
-          No organizational hierarchy defined.
+          {tx("No organizational hierarchy defined.")}
         </p>
       )}
       {configureState && selectedCompanyId && (
@@ -506,7 +507,7 @@ function OrgTreeNode({
         className="group flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-accent/50 transition-colors w-full text-left no-underline text-inherit"
       >
         {hasInvalidOrgChain ? (
-          <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" aria-label="Invalid reporting chain" />
+          <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" aria-label={tx("Invalid reporting chain")} />
         ) : (
           <AgentAvatar agent={agent ?? node} size={24} />
         )}
@@ -532,7 +533,7 @@ function OrgTreeNode({
                   }}
                 >
                   <Button size="xs" variant="outline" onClick={() => onConfigureBuiltIn(builtInState)}>
-                    Set up
+                    {tx("Set up")}
                   </Button>
                 </span>
               )}

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "packageName": "@paperclipai/teams-catalog",
   "packageVersion": "0.1.0",
-  "generatedAt": "2026-10-08T10:35:56.448Z",
+  "generatedAt": "2026-11-01T23:29:23.932Z",
   "teams": [
     {
       "id": "paperclipai:bundled:company-defaults:core-exec-team",
@@ -133,6 +133,538 @@
       "trustLevel": "markdown_only",
       "compatibility": "compatible",
       "contentHash": "sha256:9d0416ebc0a81585dc51b73efb25decba9e1e3f3741940fc9fca74f3238f344d"
+    },
+    {
+      "id": "paperclipai:bundled:health:clinic-team",
+      "key": "paperclipai/bundled/health/clinic-team",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "clinic-team",
+      "name": "Clinic & Medical Practice",
+      "description": "Health team for a clinic or medical practice: a Medical Director who leads, a Patient Coordinator for scheduling and follow-up, a Health Communications lead for patient education and social media, and a Privacy & Compliance officer for LOPDP/HIPAA.",
+      "path": "catalog/bundled/health/clinic-team",
+      "entrypoint": "TEAM.md",
+      "schema": "agentcompanies/v1",
+      "defaultInstall": false,
+      "recommendedForCompanyTypes": [
+        "health",
+        "clinic",
+        "medical-practice"
+      ],
+      "tags": [
+        "health",
+        "clinic",
+        "patients",
+        "compliance"
+      ],
+      "counts": {
+        "agents": 4,
+        "projects": 1,
+        "tasks": 0,
+        "routines": 1,
+        "localSkills": 0,
+        "catalogSkills": 4,
+        "externalSkillSources": 0
+      },
+      "rootAgentSlugs": [
+        "medical-director"
+      ],
+      "agentSlugs": [
+        "health-communications",
+        "medical-director",
+        "patient-coordinator",
+        "privacy-officer"
+      ],
+      "projectSlugs": [
+        "clinic-operations"
+      ],
+      "requiredSkills": [
+        {
+          "type": "catalog",
+          "ref": "clinical-evidence-review",
+          "agentSlugs": [
+            "health-communications",
+            "medical-director"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:clinical-evidence-review",
+          "catalogSkillKey": "paperclipai/bundled/health/clinical-evidence-review"
+        },
+        {
+          "type": "catalog",
+          "ref": "health-data-privacy",
+          "agentSlugs": [
+            "medical-director",
+            "patient-coordinator",
+            "privacy-officer"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:health-data-privacy",
+          "catalogSkillKey": "paperclipai/bundled/health/health-data-privacy"
+        },
+        {
+          "type": "catalog",
+          "ref": "patient-communication",
+          "agentSlugs": [
+            "health-communications",
+            "patient-coordinator"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:patient-communication",
+          "catalogSkillKey": "paperclipai/bundled/health/patient-communication"
+        },
+        {
+          "type": "catalog",
+          "ref": "task-planning",
+          "agentSlugs": [
+            "medical-director"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:paperclip-operations:task-planning",
+          "catalogSkillKey": "paperclipai/bundled/paperclip-operations/task-planning"
+        }
+      ],
+      "envInputs": [],
+      "sourceRefs": [],
+      "files": [
+        {
+          "path": "TEAM.md",
+          "kind": "team",
+          "sizeBytes": 2208,
+          "sha256": "b68545376054d32e0e3553804b61b380d4e9a93f2206be688c1563f5580ab519"
+        },
+        {
+          "path": "agents/health-communications/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 766,
+          "sha256": "3421cc53dc5171d4be72a675a36e6f098e5beb6b2dfb573d4e125983a2cc56d5"
+        },
+        {
+          "path": "agents/medical-director/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 804,
+          "sha256": "105549af61330560d7f525ac11151b20f833bde7c267398dc1b71a8d84c4c267"
+        },
+        {
+          "path": "agents/patient-coordinator/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 761,
+          "sha256": "8aee4b6a17225ab41803c6f27546138a429221b568a5ce5700941c53be632729"
+        },
+        {
+          "path": "agents/privacy-officer/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 742,
+          "sha256": "0d0ff3d7207d6dec87ebbfd1ec6c8058efeb298593fe7f7327e3fece90e17e3f"
+        },
+        {
+          "path": "projects/clinic-operations/PROJECT.md",
+          "kind": "project",
+          "sizeBytes": 390,
+          "sha256": "8d532f26ffca1d57e17fa0f38ce7eaf1495a7bf481c0ec884d4eb6c0e3f86b89"
+        },
+        {
+          "path": "projects/clinic-operations/tasks/weekly-clinic-review/TASK.md",
+          "kind": "task",
+          "sizeBytes": 362,
+          "sha256": "4e5838da04bf3c1b191e07ce5d4171e494b8aca72ac7587ebd2dc99e048bf23e"
+        }
+      ],
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "contentHash": "sha256:9464e962c0ae7dfa1c61aa6ce6244a097a41d5121c19cad33196a187baf50054"
+    },
+    {
+      "id": "paperclipai:bundled:health:clinical-research-team",
+      "key": "paperclipai/bundled/health/clinical-research-team",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "clinical-research-team",
+      "name": "Clinical Research",
+      "description": "Health team for clinical research: a Principal Investigator assistant who coordinates, an Evidence Analyst for literature and protocol support, and a Research Ethics & Data officer for consent, ethics-committee files and de-identified datasets.",
+      "path": "catalog/bundled/health/clinical-research-team",
+      "entrypoint": "TEAM.md",
+      "schema": "agentcompanies/v1",
+      "defaultInstall": false,
+      "recommendedForCompanyTypes": [
+        "health",
+        "research",
+        "hospital"
+      ],
+      "tags": [
+        "health",
+        "research",
+        "evidence",
+        "ethics"
+      ],
+      "counts": {
+        "agents": 3,
+        "projects": 1,
+        "tasks": 0,
+        "routines": 1,
+        "localSkills": 0,
+        "catalogSkills": 4,
+        "externalSkillSources": 0
+      },
+      "rootAgentSlugs": [
+        "research-lead"
+      ],
+      "agentSlugs": [
+        "evidence-analyst",
+        "research-ethics",
+        "research-lead"
+      ],
+      "projectSlugs": [
+        "research-program"
+      ],
+      "requiredSkills": [
+        {
+          "type": "catalog",
+          "ref": "clinical-evidence-review",
+          "agentSlugs": [
+            "evidence-analyst",
+            "research-lead"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:clinical-evidence-review",
+          "catalogSkillKey": "paperclipai/bundled/health/clinical-evidence-review"
+        },
+        {
+          "type": "catalog",
+          "ref": "health-data-privacy",
+          "agentSlugs": [
+            "research-ethics",
+            "research-lead"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:health-data-privacy",
+          "catalogSkillKey": "paperclipai/bundled/health/health-data-privacy"
+        },
+        {
+          "type": "catalog",
+          "ref": "patient-communication",
+          "agentSlugs": [
+            "research-ethics"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:patient-communication",
+          "catalogSkillKey": "paperclipai/bundled/health/patient-communication"
+        },
+        {
+          "type": "catalog",
+          "ref": "task-planning",
+          "agentSlugs": [
+            "research-lead"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:paperclip-operations:task-planning",
+          "catalogSkillKey": "paperclipai/bundled/paperclip-operations/task-planning"
+        }
+      ],
+      "envInputs": [],
+      "sourceRefs": [],
+      "files": [
+        {
+          "path": "TEAM.md",
+          "kind": "team",
+          "sizeBytes": 2013,
+          "sha256": "72bcfae6f9fd28e46579d87d5b7c45ea3e14c4613ec76acd8c8584ef45ba62c6"
+        },
+        {
+          "path": "agents/evidence-analyst/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 730,
+          "sha256": "17d21eb1669350c5248ccc473d402fb73d73f7a0913513aaf9cf58b7b4f41790"
+        },
+        {
+          "path": "agents/research-ethics/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 771,
+          "sha256": "9a261f737ae02f30d8129f281a1e2db753b716499b6305d07085df9e9723194e"
+        },
+        {
+          "path": "agents/research-lead/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 797,
+          "sha256": "ffa644932299d28587e964bb7711122848a8bc8c4a0b1fb7e7becc5e1797e171"
+        },
+        {
+          "path": "projects/research-program/PROJECT.md",
+          "kind": "project",
+          "sizeBytes": 284,
+          "sha256": "12af9bc8bfb4208d377ecd5b5994521b18d606a3a7686b816c44b31a9b4492ab"
+        },
+        {
+          "path": "projects/research-program/tasks/monthly-literature-watch/TASK.md",
+          "kind": "task",
+          "sizeBytes": 334,
+          "sha256": "e7692de051251c15bbbfa66d1a4075317ea8238c38a8c483795339cf8922aaef"
+        }
+      ],
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "contentHash": "sha256:87d68d526186656213ab893ef57fc59eddceede0a5fe72dc2d3ffccd67ea5904"
+    },
+    {
+      "id": "paperclipai:bundled:health:digital-health-team",
+      "key": "paperclipai/bundled/health/digital-health-team",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "digital-health-team",
+      "name": "Digital Health & Telemedicine",
+      "description": "Health team for digital-health products and telemedicine services: a Digital Health Lead, a Clinical Safety officer who reviews risks of features that affect patients, and a Patient Experience designer for accessible, bilingual flows.",
+      "path": "catalog/bundled/health/digital-health-team",
+      "entrypoint": "TEAM.md",
+      "schema": "agentcompanies/v1",
+      "defaultInstall": false,
+      "recommendedForCompanyTypes": [
+        "health",
+        "digital-health",
+        "telemedicine",
+        "software"
+      ],
+      "tags": [
+        "health",
+        "digital-health",
+        "telemedicine",
+        "safety"
+      ],
+      "counts": {
+        "agents": 3,
+        "projects": 1,
+        "tasks": 0,
+        "routines": 1,
+        "localSkills": 0,
+        "catalogSkills": 4,
+        "externalSkillSources": 0
+      },
+      "rootAgentSlugs": [
+        "digital-health-lead"
+      ],
+      "agentSlugs": [
+        "clinical-safety",
+        "digital-health-lead",
+        "patient-experience"
+      ],
+      "projectSlugs": [
+        "digital-health-product"
+      ],
+      "requiredSkills": [
+        {
+          "type": "catalog",
+          "ref": "clinical-evidence-review",
+          "agentSlugs": [
+            "clinical-safety",
+            "digital-health-lead"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:clinical-evidence-review",
+          "catalogSkillKey": "paperclipai/bundled/health/clinical-evidence-review"
+        },
+        {
+          "type": "catalog",
+          "ref": "health-data-privacy",
+          "agentSlugs": [
+            "clinical-safety",
+            "digital-health-lead"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:health-data-privacy",
+          "catalogSkillKey": "paperclipai/bundled/health/health-data-privacy"
+        },
+        {
+          "type": "catalog",
+          "ref": "patient-communication",
+          "agentSlugs": [
+            "patient-experience"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:patient-communication",
+          "catalogSkillKey": "paperclipai/bundled/health/patient-communication"
+        },
+        {
+          "type": "catalog",
+          "ref": "task-planning",
+          "agentSlugs": [
+            "digital-health-lead"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:paperclip-operations:task-planning",
+          "catalogSkillKey": "paperclipai/bundled/paperclip-operations/task-planning"
+        }
+      ],
+      "envInputs": [],
+      "sourceRefs": [],
+      "files": [
+        {
+          "path": "TEAM.md",
+          "kind": "team",
+          "sizeBytes": 1977,
+          "sha256": "d6b12c93f2ea63e88fbc6209d2f16b9dbda1ba9ce953766d0186fd11dc6af480"
+        },
+        {
+          "path": "agents/clinical-safety/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 752,
+          "sha256": "b2a7ba8e3d8d4710ade6173bc97e768c49f4e7ce54716a9ddccbd7f937a21168"
+        },
+        {
+          "path": "agents/digital-health-lead/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 774,
+          "sha256": "47d783927c5749a427b589ef7a1269fe5d9fd29a25c6d6261a31c9d2e3447c02"
+        },
+        {
+          "path": "agents/patient-experience/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 757,
+          "sha256": "2cada6c6ff76b83fe320eeb1a054d835238c7a613c5aae727b8d102bc139a327"
+        },
+        {
+          "path": "projects/digital-health-product/PROJECT.md",
+          "kind": "project",
+          "sizeBytes": 307,
+          "sha256": "fba207854a19fc55b1ef0aca3542abe51019570182abcefaa29a7abd5c756cae"
+        },
+        {
+          "path": "projects/digital-health-product/tasks/biweekly-safety-review/TASK.md",
+          "kind": "task",
+          "sizeBytes": 318,
+          "sha256": "ca674314d4ec2914a2b94a7fa2e5a2909072a2b9902ecb9a6360ff4404641290"
+        }
+      ],
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "contentHash": "sha256:b3aa4c9229cfdb8a6d1fedde9973b4f448f7e0263e52a1e381275f295693db51"
+    },
+    {
+      "id": "paperclipai:bundled:health:medical-education-team",
+      "key": "paperclipai/bundled/health/medical-education-team",
+      "kind": "bundled",
+      "category": "health",
+      "slug": "medical-education-team",
+      "name": "Medical Education & Content",
+      "description": "Health team for medical education and content: an Education Director who plans courses, a Medical Writer for evidence-based articles and scripts, and a Course Designer for lessons, quizzes and bilingual material.",
+      "path": "catalog/bundled/health/medical-education-team",
+      "entrypoint": "TEAM.md",
+      "schema": "agentcompanies/v1",
+      "defaultInstall": false,
+      "recommendedForCompanyTypes": [
+        "health",
+        "education",
+        "content"
+      ],
+      "tags": [
+        "health",
+        "education",
+        "content",
+        "bilingual"
+      ],
+      "counts": {
+        "agents": 3,
+        "projects": 1,
+        "tasks": 0,
+        "routines": 1,
+        "localSkills": 0,
+        "catalogSkills": 4,
+        "externalSkillSources": 0
+      },
+      "rootAgentSlugs": [
+        "education-director"
+      ],
+      "agentSlugs": [
+        "course-designer",
+        "education-director",
+        "medical-writer"
+      ],
+      "projectSlugs": [
+        "education-program"
+      ],
+      "requiredSkills": [
+        {
+          "type": "catalog",
+          "ref": "clinical-evidence-review",
+          "agentSlugs": [
+            "education-director",
+            "medical-writer"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:clinical-evidence-review",
+          "catalogSkillKey": "paperclipai/bundled/health/clinical-evidence-review"
+        },
+        {
+          "type": "catalog",
+          "ref": "paperclipai/bundled/health/health-data-privacy",
+          "agentSlugs": [],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:health-data-privacy",
+          "catalogSkillKey": "paperclipai/bundled/health/health-data-privacy"
+        },
+        {
+          "type": "catalog",
+          "ref": "patient-communication",
+          "agentSlugs": [
+            "course-designer",
+            "medical-writer"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:health:patient-communication",
+          "catalogSkillKey": "paperclipai/bundled/health/patient-communication"
+        },
+        {
+          "type": "catalog",
+          "ref": "task-planning",
+          "agentSlugs": [
+            "education-director"
+          ],
+          "resolved": true,
+          "catalogSkillId": "paperclipai:bundled:paperclip-operations:task-planning",
+          "catalogSkillKey": "paperclipai/bundled/paperclip-operations/task-planning"
+        }
+      ],
+      "envInputs": [],
+      "sourceRefs": [],
+      "files": [
+        {
+          "path": "TEAM.md",
+          "kind": "team",
+          "sizeBytes": 1946,
+          "sha256": "c5c127dae28686679961fce1a75ef92d64af89e37f0d94c499a6c0bfe63b2911"
+        },
+        {
+          "path": "agents/course-designer/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 712,
+          "sha256": "b24bb5599e1ebfa6b0e2433fba2900921d863ddb62f8336b058de3002779a3f8"
+        },
+        {
+          "path": "agents/education-director/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 748,
+          "sha256": "a8b178560a909bcfc99e189eefa34cbc506351cb6caa545913ee3dce6fc55ec4"
+        },
+        {
+          "path": "agents/medical-writer/AGENTS.md",
+          "kind": "agent",
+          "sizeBytes": 707,
+          "sha256": "725519b861525a68d859d9f0eed03a9cd54c44d1485830f54b7f98f2737b2745"
+        },
+        {
+          "path": "projects/education-program/PROJECT.md",
+          "kind": "project",
+          "sizeBytes": 251,
+          "sha256": "724f1f72ff19cb8366c932e13d43fd661b722a0fe9b4d8654dcc3c0dd5e03b69"
+        },
+        {
+          "path": "projects/education-program/tasks/weekly-content-plan/TASK.md",
+          "kind": "task",
+          "sizeBytes": 270,
+          "sha256": "e8bd36b9e5895851fad9b9951caecaf6be27bf57b879c20c271eb4f68de98428"
+        }
+      ],
+      "trustLevel": "markdown_only",
+      "compatibility": "compatible",
+      "contentHash": "sha256:1e52d8add5ccd90456bd02fbeaa8c1190c8614c7514747e17df3ce4372723fe1"
     },
     {
       "id": "paperclipai:bundled:product:product-design",

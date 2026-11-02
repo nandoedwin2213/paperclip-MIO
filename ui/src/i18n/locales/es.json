@@ -1,9 +1,304 @@
 {
   "app": {
     "noCompanies": {
-      "title": "Crea tu primera empresa",
-      "description": "Comienza creando una empresa.",
-      "newCompany": "Nueva empresa"
+      "title": "Crea tu primera organización",
+      "description": "Empieza creando tu clínica, consultorio o proyecto de salud.",
+      "newCompany": "Nueva organización"
     }
+  },
+  "brand": {
+    "name": "Galeno IA",
+    "tagline": "Equipos de IA para proyectos de salud"
+  },
+  "nav": {
+    "newTask": {
+      "label": "Nueva tarea",
+      "hint": "Crea una tarea y asígnala a un agente o a una persona"
+    },
+    "search": {
+      "label": "Buscar",
+      "hint": "Encuentra tareas, agentes, proyectos y documentos"
+    },
+    "dashboard": {
+      "label": "Panel",
+      "hint": "Resumen: agentes activos, avance de tareas y costos"
+    },
+    "inbox": {
+      "label": "Bandeja",
+      "hint": "Lo que necesita tu atención: respuestas, fallos y revisiones"
+    },
+    "chats": {
+      "label": "Chat",
+      "hint": "Conversa directamente con tus agentes"
+    },
+    "decisions": {
+      "label": "Decisiones",
+      "hint": "Aprobaciones y elecciones que esperan por ti"
+    },
+    "status": {
+      "label": "Estado",
+      "hint": "Tarjetas de estado de cada área de trabajo"
+    },
+    "boardChat": {
+      "label": "Sala de reuniones",
+      "hint": "Conversación grupal con todo el equipo"
+    },
+    "issues": {
+      "label": "Tareas",
+      "hint": "Todo el trabajo, su responsable y su estado"
+    },
+    "projects": {
+      "label": "Proyectos",
+      "hint": "Agrupa tareas por programa de salud o iniciativa"
+    },
+    "routines": {
+      "label": "Rutinas",
+      "hint": "Trabajo que se repite con horario (diario, semanal…)"
+    },
+    "artifacts": {
+      "label": "Entregables",
+      "hint": "Archivos y documentos que produjeron tus agentes"
+    },
+    "cases": {
+      "label": "Casos",
+      "hint": "Flujos de varios pasos que pasan entre agentes"
+    },
+    "goals": {
+      "label": "Objetivos",
+      "hint": "Metas grandes que dan propósito a las tareas"
+    },
+    "workspaces": {
+      "label": "Espacios de trabajo",
+      "hint": "Carpetas aisladas donde los agentes trabajan"
+    },
+    "agents": {
+      "label": "Agentes",
+      "hint": "Tu equipo de IA: roles, modelos y estado"
+    },
+    "skills": {
+      "label": "Habilidades",
+      "hint": "Conocimiento que enseñas a los agentes (protocolos, guías)"
+    },
+    "apps": {
+      "label": "Conectores",
+      "hint": "Conecta servicios como Gmail, GitHub o Notion"
+    },
+    "activity": {
+      "label": "Actividad",
+      "hint": "Registro de auditoría: cada cambio y quién lo hizo"
+    },
+    "audit": {
+      "label": "Auditoría",
+      "hint": "Registro de auditoría: cada cambio y quién lo hizo"
+    },
+    "org": {
+      "label": "Organigrama",
+      "hint": "Organigrama: quién reporta a quién"
+    },
+    "timeline": {
+      "label": "Cronología",
+      "hint": "Vista en el tiempo de tareas y ejecuciones"
+    },
+    "costs": {
+      "label": "Costos",
+      "hint": "Gasto por agente y presupuestos con límites"
+    },
+    "commentary": {
+      "label": "Comentarios",
+      "hint": "Resumen narrado de lo que hicieron los agentes"
+    },
+    "settings": {
+      "label": "Configuración",
+      "hint": "Nombre de la organización, miembros, claves y opciones"
+    },
+    "teams": {
+      "label": "Equipos",
+      "hint": "Instala equipos listos (incluye equipos de salud)"
+    },
+    "sections": {
+      "work": "Trabajo",
+      "org": "Organización",
+      "organization": "Organización",
+      "projects": "Proyectos",
+      "agents": "Agentes"
+    }
+  },
+  "guide": {
+    "dashboard": {
+      "title": "Panel",
+      "description": "Tu organización de un vistazo: qué agentes trabajan ahora, cómo avanzan las tareas y cuánto estás gastando.",
+      "buttons": {
+        "0": "Nueva tarea: crea trabajo para un agente",
+        "1": "Gráficos: actividad de los últimos 14 días",
+        "2": "Tareas recientes: abre una para ver su conversación"
+      }
+    },
+    "inbox": {
+      "title": "Bandeja",
+      "description": "Todo lo que necesita a una persona: preguntas de agentes, ejecuciones fallidas y trabajo listo para revisar.",
+      "buttons": {
+        "0": "Abre un elemento para responder o aprobar",
+        "1": "Marca como leído para limpiarlo",
+        "2": "Filtros: muestra solo lo importante ahora"
+      }
+    },
+    "issues": {
+      "title": "Tareas",
+      "description": "Cada tarea tiene un responsable (agente o persona), un estado y una conversación. Ejemplo: «Redactar el consentimiento informado del nuevo tratamiento láser».",
+      "buttons": {
+        "0": "Nueva tarea: describe el trabajo y elige quién lo hace",
+        "1": "Estado: pendiente → por hacer → en curso → revisión → hecho",
+        "2": "Agrupar / Ordenar / Columnas: cambia cómo se ve la lista"
+      }
+    },
+    "projects": {
+      "title": "Proyectos",
+      "description": "Agrupa tareas relacionadas en un programa de salud, p. ej. «Campaña de educación en diabetes» o «Web de la clínica».",
+      "buttons": {
+        "0": "Nuevo proyecto: crea un programa con un agente líder",
+        "1": "Abre un proyecto para ver sus tareas y avance",
+        "2": "Marca con estrella para fijarlo en el menú"
+      }
+    },
+    "routines": {
+      "title": "Rutinas",
+      "description": "Trabajo que se repite solo con un horario, p. ej. un informe semanal de citas o una revisión mensual de cumplimiento.",
+      "buttons": {
+        "0": "Nueva rutina: elige el agente, las instrucciones y el horario",
+        "1": "Pausar / Reanudar: detiene o reinicia una rutina",
+        "2": "Ejecutar ahora: la corre una vez de inmediato"
+      }
+    },
+    "artifacts": {
+      "title": "Entregables",
+      "description": "Documentos, imágenes y archivos producidos por los agentes. Revísalos antes de usarlos con pacientes.",
+      "buttons": {
+        "0": "Abre un archivo para verlo",
+        "1": "Comenta un párrafo para pedir cambios",
+        "2": "Descarga para usarlo fuera de la app"
+      }
+    },
+    "agents": {
+      "title": "Agentes",
+      "description": "Tu equipo de IA. Cada agente tiene un rol (p. ej. Director médico, Coordinador de pacientes), un modelo (Claude, Gemini, GPT…) y un presupuesto.",
+      "buttons": {
+        "0": "Nuevo agente: contrata un nuevo integrante",
+        "1": "Pausar / Reanudar: detén a un agente cuando quieras",
+        "2": "Abre un agente para editar instrucciones, habilidades y ejecuciones"
+      }
+    },
+    "skills": {
+      "title": "Habilidades",
+      "description": "Conocimiento reutilizable para los agentes: protocolos clínicos, guías de redacción, reglas de privacidad. Instala habilidades de salud del catálogo.",
+      "buttons": {
+        "0": "Instalar: agrega una habilidad del catálogo",
+        "1": "Estudio: escribe o edita tu propia habilidad",
+        "2": "Asignar: da una habilidad a agentes concretos"
+      }
+    },
+    "apps": {
+      "title": "Conectores",
+      "description": "Conecta servicios externos para que los agentes los usen. Cada acción puede estar Permitida, Preguntar primero o Apagada.",
+      "buttons": {
+        "0": "Conectar: vincula un servicio nuevo",
+        "1": "Permisos: elige qué pueden hacer los agentes",
+        "2": "Desconectar: quita el acceso cuando quieras"
+      }
+    },
+    "activity": {
+      "title": "Actividad",
+      "description": "Registro de auditoría: cada cambio, quién lo hizo y cuándo. Útil para gobernanza clínica y cumplimiento.",
+      "buttons": {
+        "0": "Filtra por agente, persona o tipo",
+        "1": "Abre un registro para ver el detalle",
+        "2": "Exporta cuando un auditor lo pida"
+      }
+    },
+    "org": {
+      "title": "Organigrama",
+      "description": "Quién reporta a quién. El agente líder delega el trabajo hacia abajo.",
+      "buttons": {
+        "0": "Acerca / aleja para explorar",
+        "1": "Haz clic en un agente para abrirlo",
+        "2": "Arrastra para moverte"
+      }
+    },
+    "costs": {
+      "title": "Costos",
+      "description": "Dinero gastado por cada agente y presupuestos. Al llegar al límite, el agente se pausa solo.",
+      "buttons": {
+        "0": "Rango de fechas: elige el periodo",
+        "1": "Presupuestos: pon límites mensuales por agente o proyecto",
+        "2": "Incidentes: límites que se superaron"
+      }
+    },
+    "goals": {
+      "title": "Objetivos",
+      "description": "Objetivos de alto nivel, p. ej. «Reducir inasistencias un 20 %». Tareas y proyectos se enlazan a un objetivo para que los agentes sepan el porqué.",
+      "buttons": {
+        "0": "Nuevo objetivo: escribe la meta",
+        "1": "Enlaza proyectos y tareas a un objetivo",
+        "2": "Sigue el avance en el tiempo"
+      }
+    },
+    "company_settings": {
+      "title": "Configuración",
+      "description": "Datos de la organización, miembros, claves (API keys) y opciones avanzadas.",
+      "buttons": {
+        "0": "Miembros: invita a tu equipo",
+        "1": "Claves: guarda API keys de forma segura",
+        "2": "Catálogo de equipos: instala equipos de salud"
+      }
+    },
+    "search": {
+      "title": "Buscar",
+      "description": "Encuentra cualquier cosa en tu organización.",
+      "buttons": {
+        "0": "Escribe una palabra y pulsa Enter",
+        "1": "Abre un resultado para ir a él"
+      }
+    },
+    "chats": {
+      "title": "Chat",
+      "description": "Conversaciones directas con tus agentes.",
+      "buttons": {
+        "0": "Elige un agente",
+        "1": "Escribe tu mensaje y pulsa Enviar"
+      }
+    },
+    "teams_catalog": {
+      "title": "Catálogo de equipos",
+      "description": "Equipos de IA listos para usar. Equipos de salud: clínica, investigación clínica, salud digital y educación médica. Abre uno, revisa sus agentes e instálalo en tu organización.",
+      "buttons": {
+        "0": "Buscar equipos: filtra por nombre o categoría",
+        "1": "Tarjeta de equipo: ve agentes, roles y habilidades requeridas",
+        "2": "Instalar equipo: agrega sus agentes a tu organización"
+      }
+    }
+  },
+  "ui": {
+    "language": "Idioma",
+    "helpMode": "Modo explicativo",
+    "helpModeOn": "Explicaciones activadas",
+    "helpModeOff": "Explicaciones desactivadas",
+    "buttonsHere": "Botones de esta página",
+    "healthNotice": "Datos de salud: no entregues a los agentes datos identificables de pacientes salvo que tu instalación cumpla la ley local (p. ej. LOPDP Ecuador, HIPAA, RGPD)."
+  },
+  "onboarding": {
+    "orgTitle": "¿Cómo se llama tu organización?",
+    "orgHint": "Usa el nombre de tu clínica, consultorio, hospital, laboratorio o proyecto de salud.",
+    "agentTitle": "Crea tu primer agente",
+    "connectTitle": "Conecta un modelo de IA",
+    "getStarted": "Empecemos...",
+    "name": "Nombre",
+    "orgPlaceholder": "p. ej. Clínica San Rafael",
+    "agentName": "Nombre del agente",
+    "agentHint": "Tu primer agente dirige el equipo, p. ej. un Director médico o un Gerente de clínica.",
+    "agentPlaceholder": "p. ej. Director médico",
+    "worksWith": "Galeno IA funciona con tu suscripción o tus claves API.",
+    "firstAgent": "Tu primer agente",
+    "ready": "¡{{name}} está listo para trabajar!",
+    "continue": "Continuar",
+    "next": "Siguiente"
   }
 }

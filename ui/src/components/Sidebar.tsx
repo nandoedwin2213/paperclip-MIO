@@ -23,8 +23,7 @@ import {
   MessageCircle,
   GanttChartSquare,
   LayoutGrid,
-  Users,
-} from "lucide-react";
+  Users, HeartPulse } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SidebarSection } from "./SidebarSection";
@@ -52,6 +51,9 @@ import { PluginSlotOutlet } from "@/plugins/slots";
 import { PluginLauncherOutlet } from "@/plugins/launchers";
 import { SidebarCompanyMenu } from "./SidebarCompanyMenu";
 import { primarySidebarStyles } from "./primary-sidebar-styles";
+import { GuidanceControls } from "./GuidanceControls";
+import { useTranslation } from "@/i18n";
+import { useGuideMode } from "../lib/ui-guidance";
 
 export function Sidebar({ children }: { children?: ReactNode }) {
   const { enabled } = useCoordinatorWorkspaceEnabled();
@@ -60,6 +62,10 @@ export function Sidebar({ children }: { children?: ReactNode }) {
 
 function ClassicSidebar({ children }: { children?: ReactNode }) {
   const { openNewIssue } = useDialogActions();
+  const { t } = useTranslation();
+  const guideMode = useGuideMode();
+  const newTaskLabel = t("nav.newTask.label", { defaultValue: "New Task" });
+  const newTaskHint = t("nav.newTask.hint", { defaultValue: "" });
   const { enabled: agentChatEnabled } = useAgentChatEnabled();
   const chatNavigation = useAgentChatNavigation();
   const unreadChatCount = chatNavigation.chats.data?.filter(chat => chat.isUnreadForMe).length ?? 0;
@@ -151,6 +157,7 @@ function ClassicSidebar({ children }: { children?: ReactNode }) {
       <div className="flex h-(--sz-60px) shrink-0 items-center gap-1 px-3">
         <SidebarCompanyMenu />
       </div>
+      {!rail ? <GuidanceControls className="shrink-0 px-3 pb-2" /> : null}
 
       <nav className={primarySidebarStyles.nav}>
         <div className={primarySidebarStyles.group}>
@@ -160,19 +167,26 @@ function ClassicSidebar({ children }: { children?: ReactNode }) {
               <button
                 onClick={() => openNewIssue()}
                 data-slot="icon-button"
-                aria-label={rail ? "New Task" : undefined}
+                aria-label={rail ? newTaskLabel : undefined}
                 className={cn(
                   "flex items-center gap-2.5 mx-2 rounded-lg px-2 py-1.5 pointer-coarse:py-1 text-(length:--text-compact) font-medium text-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 )}
               >
                 <SquarePen className="h-4 w-4 shrink-0" />
-                <span className={rail ? SIDEBAR_RAIL_HIDDEN_LABEL : "truncate"}>New Task</span>
+                {!rail && guideMode && newTaskHint ? (
+                  <span className="flex min-w-0 flex-col text-left">
+                    <span className="truncate">{newTaskLabel}</span>
+                    <span data-slot="sidebar-nav-hint" className="text-(length:--text-nano) font-normal leading-snug text-muted-foreground">{newTaskHint}</span>
+                  </span>
+                ) : (
+                  <span className={rail ? SIDEBAR_RAIL_HIDDEN_LABEL : "truncate"}>{newTaskLabel}</span>
+                )}
               </button>
             );
             return rail ? (
               <Tooltip>
                 <TooltipTrigger asChild>{newTaskButton}</TooltipTrigger>
-                <TooltipContent side="right">New Task</TooltipContent>
+                <TooltipContent side="right">{newTaskLabel}</TooltipContent>
               </Tooltip>
             ) : (
               newTaskButton
@@ -280,6 +294,7 @@ function ClassicSidebar({ children }: { children?: ReactNode }) {
           >
             <SidebarNavItem to="/agents" label="Agents" icon={Users} />
             <SidebarNavItem to="/skills" label="Skills" icon={Boxes} />
+            <SidebarNavItem to="/teams-catalog" label="Teams" icon={HeartPulse} />
             <SidebarNavItem to="/apps" label="Connectors" icon={Unplug} />
             <SidebarNavItem to="/activity" label="Audit" icon={History} />
           </SidebarSection>

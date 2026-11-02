@@ -17,6 +17,8 @@ import { Fragment, useMemo, type ReactNode } from "react";
 import { PluginSlotOutlet, usePluginSlots } from "@/plugins/slots";
 import { PluginLauncherOutlet, usePluginLaunchers } from "@/plugins/launchers";
 import { cn } from "../lib/utils";
+import { useTranslation } from "@/i18n";
+import { navKeyForLabel } from "../lib/ui-guidance";
 import { useCoordinatorPresentation } from "./coordinator/CoordinatorPresentation";
 
 type GlobalToolbarContext = { companyId: string | null; companyPrefix: string | null };
@@ -53,7 +55,16 @@ function GlobalToolbar({
   );
 }
 
+function useCrumbLabel() {
+  const { t } = useTranslation();
+  return (label: string) => {
+    const key = navKeyForLabel(label);
+    return key ? t(`nav.${key}.label`, { defaultValue: label }) : label;
+  };
+}
+
 export function BreadcrumbBar({ taskDetailLayout = false }: { taskDetailLayout?: boolean }) {
+  const crumbLabel = useCrumbLabel();
   const coordinatorEnabled = useCoordinatorPresentation();
   const {
     breadcrumbs,
@@ -119,7 +130,7 @@ export function BreadcrumbBar({ taskDetailLayout = false }: { taskDetailLayout?:
           {currentCrumb.leading ? (
             <span className="flex shrink-0 items-center self-center">{currentCrumb.leading}</span>
           ) : null}
-          <span className="min-w-0 truncate" title={currentCrumb.label}>{currentCrumb.label}</span>
+          <span className="min-w-0 truncate" title={crumbLabel(currentCrumb.label)}>{crumbLabel(currentCrumb.label)}</span>
           <CrumbIdentifier identifier={currentCrumb.identifier} />
         </h1>
         {globalToolbarSlots}
@@ -144,11 +155,11 @@ export function BreadcrumbBar({ taskDetailLayout = false }: { taskDetailLayout?:
                           <span className="flex shrink-0 items-center self-center">{crumb.leading}</span>
                         )}
                         {!taskDetailLayout ? <CrumbIdentifier identifier={crumb.identifier} /> : null}
-                        <span className="min-w-0 truncate">{crumb.label}</span>
+                        <span className="min-w-0 truncate">{crumbLabel(crumb.label)}</span>
                         {taskDetailLayout && isLast ? <CrumbIdentifier identifier={crumb.identifier} /> : null}
                       </BreadcrumbPage>
                     ) : (
-                      <BreadcrumbPage className="truncate">{crumb.label}</BreadcrumbPage>
+                      <BreadcrumbPage className="truncate">{crumbLabel(crumb.label)}</BreadcrumbPage>
                     )
                   ) : (
                     <BreadcrumbLink asChild>
@@ -164,7 +175,7 @@ export function BreadcrumbBar({ taskDetailLayout = false }: { taskDetailLayout?:
                             <span className="flex shrink-0 items-center self-center">{crumb.leading}</span>
                           )}
                           {!taskDetailLayout ? <CrumbIdentifier identifier={crumb.identifier} /> : null}
-                          <span className="min-w-0 truncate">{crumb.label}</span>
+                          <span className="min-w-0 truncate">{crumbLabel(crumb.label)}</span>
                           {taskDetailLayout && isLast ? <CrumbIdentifier identifier={crumb.identifier} /> : null}
                         </Link>
                       ) : (
@@ -175,7 +186,7 @@ export function BreadcrumbBar({ taskDetailLayout = false }: { taskDetailLayout?:
                             i === 0 && "font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground",
                           )}
                         >
-                          {crumb.label}
+                          {crumbLabel(crumb.label)}
                         </Link>
                       )}
                     </BreadcrumbLink>
@@ -203,11 +214,11 @@ export function BreadcrumbBar({ taskDetailLayout = false }: { taskDetailLayout?:
                 <span className="flex shrink-0 items-center self-center">{breadcrumbs[0].leading}</span>
               )}
               <CrumbIdentifier identifier={breadcrumbs[0].identifier} />
-              <span className="truncate">{breadcrumbs[0].label}</span>
+              <span className="truncate">{crumbLabel(breadcrumbs[0].label)}</span>
             </h1>
           ) : (
             <h1 className="text-sm font-semibold uppercase tracking-wider truncate">
-              {breadcrumbs[0].label}
+              {crumbLabel(breadcrumbs[0].label)}
             </h1>
           )}
         </div>

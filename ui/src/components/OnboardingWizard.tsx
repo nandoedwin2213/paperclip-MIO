@@ -92,6 +92,8 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from "../lib/utils";
+import { useTranslation } from "@/i18n";
+import { LanguageToggle } from "./GuidanceControls";
 import {
   extractModelName,
   extractProviderIdWithFallback
@@ -478,6 +480,7 @@ function OnboardingWizardInner({
 }: {
   saved: Record<string, unknown> | null;
 }) {
+  const { t } = useTranslation();
   const {
     onboardingOpen,
     onboardingOptions,
@@ -2710,6 +2713,7 @@ function OnboardingWizardInner({
             RemoveScroll which blocks wheel events on our custom (non-DialogContent)
             scroll container. A plain div preserves the background without scroll-locking. */}
         <div className="fixed inset-0 z-50 bg-background" />
+        <LanguageToggle className="fixed right-4 top-4 z-50" />
         {/* A deliberate hook for "the wizard mounted".
 
             The tests that assert it opens used to prove it by finding any text
@@ -2868,12 +2872,12 @@ function OnboardingWizardInner({
                       title={
                         <motion.span key={step} {...titleSwapMotion} className="inline-block">
                           {step === 1
-                            ? "What is the name of your organization?"
+                            ? t("onboarding.orgTitle")
                             : step === 3
-                              ? "Create your first agent"
+                              ? t("onboarding.agentTitle")
                               : step === 4
-                                ? "Connect a model"
-                                : "Let's get started..."}
+                                ? t("onboarding.connectTitle")
+                                : t("onboarding.getStarted")}
                         </motion.span>
                       }
                     />
@@ -2895,8 +2899,8 @@ function OnboardingWizardInner({
                       <p className="pt-2 text-base leading-relaxed text-muted-foreground">
                         <motion.span key={step} {...titleSwapMotion} className="inline-block">
                           {step === 4
-                            ? "Paperclip works with your subscription or API keys."
-                            : `${agentName.trim() || "Your first agent"} is ready to work!`}
+                            ? t("onboarding.worksWith")
+                            : t("onboarding.ready", { name: agentName.trim() || t("onboarding.firstAgent") })}
                         </motion.span>
                       </p>
                     </motion.div>
@@ -2922,11 +2926,11 @@ function OnboardingWizardInner({
               {step === 1 && (
                 <motion.div key="step-1" {...stepContentMotion} exit={stepHandoff ? stepContentMotion.exit : undefined} className="mx-auto flex w-full flex-col gap-9">
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="onboarding-company-name">Name</Label>
+                    <Label htmlFor="onboarding-company-name">{t("onboarding.name")}</Label>
                     <Input
                       id="onboarding-company-name"
                       className="h-(--sz-44px) rounded-lg border-transparent bg-muted shadow-none dark:bg-muted"
-                      placeholder="e.g. Northwind Labs"
+                      placeholder={t("onboarding.orgPlaceholder")}
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       onKeyDown={(e) => {
@@ -2950,7 +2954,8 @@ function OnboardingWizardInner({
               {step === 3 && (
                 <motion.div key="step-3" {...stepContentMotion} exit={stepHandoff ? stepContentMotion.exit : undefined} className="mx-auto flex w-full flex-col gap-9">
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="onboarding-agent-name">Agent name</Label>
+                    <Label htmlFor="onboarding-agent-name">{t("onboarding.agentName")}</Label>
+                    <p className="text-xs text-muted-foreground">{t("onboarding.agentHint")}</p>
                     {/*
                       Filled, not outlined, and the column's full width — the
                       same field the naming step before the hand-off draws.
@@ -2963,7 +2968,7 @@ function OnboardingWizardInner({
                     <Input
                       id="onboarding-agent-name"
                       className="h-(--sz-44px) rounded-lg border-transparent bg-muted shadow-none dark:bg-muted"
-                      placeholder="e.g. Chief of staff"
+                      placeholder={t("onboarding.agentPlaceholder")}
                       value={agentName}
                       onChange={(e) => setAgentName(e.target.value)}
                       onKeyDown={(e) => {
@@ -3447,12 +3452,12 @@ function OnboardingWizardInner({
                   // prototype's own local flow draws with "Next".
                   primaryLabel={
                     step === 1
-                      ? "Continue"
+                      ? t("onboarding.continue")
                       : step === 5
                         ? "Get started"
                         : step === 4
                           ? connectCta.label
-                          : "Next"
+                          : t("onboarding.next")
                   }
                   primaryIcon={step === 4 ? connectCta.icon : undefined}
                   loadingLabel={

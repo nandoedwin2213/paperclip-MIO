@@ -64,6 +64,8 @@ import {
 } from "../lib/shell-navigation";
 import { cn } from "../lib/utils";
 import { NotFoundPage } from "../pages/NotFound";
+import { useTranslation } from "@/i18n";
+import { PageGuide } from "./PageGuide";
 import { PluginSlotMount, resolveRouteSidebarSlot, usePluginSlots } from "../plugins/slots";
 
 function getCompanyRouteSegment(pathname: string, companyPrefix: string | undefined): string | null {
@@ -85,6 +87,7 @@ const RESERVED_APP_SUBPATHS = new Set([
 ]);
 
 export function Layout({ sidebarSections }: { sidebarSections?: ReactNode }) {
+  const { i18n } = useTranslation();
   const designSandbox = useDesignSandbox();
   const {
     sidebarOpen,
@@ -751,7 +754,10 @@ export function Layout({ sidebarSections }: { sidebarSections?: ReactNode }) {
                 />
               ) : (
                 <RouteErrorBoundary>
-                  <Outlet />
+                  <div key={i18n.language} className="contents">
+                    <PageGuide />
+                    <Outlet />
+                  </div>
                 </RouteErrorBoundary>
               )}
               </main>

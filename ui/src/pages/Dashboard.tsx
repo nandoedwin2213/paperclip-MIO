@@ -41,6 +41,7 @@ import { InlineBanner } from "../components/InlineBanner";
 import type { Agent, Issue } from "@paperclipai/shared";
 import { PluginSlotOutlet } from "@/plugins/slots";
 import { SmokeLabDashboardCard } from "../components/SmokeLabDashboardCard";
+import { tx } from "@/i18n/phrases";
 
 const DASHBOARD_ACTIVITY_LIMIT = 10;
 
@@ -301,14 +302,14 @@ export function Dashboard() {
       return (
         <EmptyState
           icon={LayoutDashboard}
-          message="Welcome to Paperclip. Set up your first organization and agent to get started."
-          action="Get Started"
+          message={tx("Welcome to Paperclip. Set up your first organization and agent to get started.")}
+          action={tx("Get Started")}
           onAction={openOnboarding}
         />
       );
     }
     return (
-      <EmptyState icon={LayoutDashboard} message="Create or select an organization to view the dashboard." />
+      <EmptyState icon={LayoutDashboard} message={tx("Create or select an organization to view the dashboard.")} />
     );
   }
 
@@ -350,14 +351,14 @@ export function Dashboard() {
         <InlineBanner
           tone="warning"
           icon={PauseCircle}
-          title="All agents in this organization are paused — nothing will run."
+          title={tx("All agents in this organization are paused — nothing will run.")}
           actions={
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/agents">Review agents</Link>
+              <Link to="/agents">{tx("Review agents")}</Link>
             </Button>
           }
         >
-          Resume at least one agent to let assigned tasks start.
+          {tx("Resume at least one agent to let assigned tasks start.")}
         </InlineBanner>
       ) : null}
 
@@ -366,14 +367,14 @@ export function Dashboard() {
           <div className="flex items-center gap-2.5">
             <Bot className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
             <p className="text-sm text-amber-900 dark:text-amber-100">
-              You have no agents.
+              {tx("You have no agents.")}
             </p>
           </div>
           <button
             onClick={() => openOnboarding({ initialStep: 3, companyId: selectedCompanyId! })}
             className="text-sm font-medium text-amber-700 hover:text-amber-900 dark:text-amber-300 dark:hover:text-amber-100 underline underline-offset-2 shrink-0"
           >
-            Create one here
+            {tx("Create one here")}
           </button>
         </div>
       )}
@@ -396,7 +397,7 @@ export function Dashboard() {
                 </div>
               </div>
               <Link to="/costs" className="text-sm underline underline-offset-2 text-red-900 dark:text-red-100">
-                Open budgets
+                {tx("Open budgets")}
               </Link>
             </div>
           ) : null}
@@ -406,7 +407,7 @@ export function Dashboard() {
               appearance={designSandbox ? "card" : "plain"}
               icon={Bot}
               value={data.agents.active + data.agents.running + data.agents.paused + data.agents.error}
-              label="Agents Enabled"
+              label={tx("Agents Enabled")}
               to="/agents"
               description={
                 <span>
@@ -420,7 +421,7 @@ export function Dashboard() {
               appearance={designSandbox ? "card" : "plain"}
               icon={CircleDot}
               value={data.tasks.inProgress}
-              label="Tasks In Progress"
+              label={tx("Tasks In Progress")}
               to="/issues"
               description={
                 <span>
@@ -433,7 +434,7 @@ export function Dashboard() {
               appearance={designSandbox ? "card" : "plain"}
               icon={DollarSign}
               value={formatCents(data.costs.monthSpendCents)}
-              label="Month Spend"
+              label={tx("Month Spend")}
               to="/costs"
               description={
                 <span>
@@ -447,7 +448,7 @@ export function Dashboard() {
               appearance={designSandbox ? "card" : "plain"}
               icon={ShieldCheck}
               value={data.pendingApprovals + data.budgets.pendingApprovals}
-              label="Pending Approvals"
+              label={tx("Pending Approvals")}
               to="/approvals"
               description={
                 <span>
@@ -462,19 +463,19 @@ export function Dashboard() {
           <SmokeLabDashboardCard companyId={selectedCompanyId!} />
 
           <div className={cn("grid grid-cols-2 gap-4", SHOW_TASK_PRIORITY_UI ? "lg:grid-cols-4" : "lg:grid-cols-3")}>
-            <ChartCard title="Run Activity" subtitle="Last 14 days">
+            <ChartCard title={tx("Run Activity")} subtitle={tx("Last 14 days")}>
               <RunActivityChart activity={data.runActivity} />
             </ChartCard>
             {/* PAP-411: "Tasks by Priority" chart hidden behind SHOW_TASK_PRIORITY_UI. */}
             {SHOW_TASK_PRIORITY_UI && (
-              <ChartCard title="Tasks by Priority" subtitle="Last 14 days">
+              <ChartCard title={tx("Tasks by Priority")} subtitle={tx("Last 14 days")}>
                 <PriorityChart issues={issues ?? []} />
               </ChartCard>
             )}
-            <ChartCard title="Tasks by Status" subtitle="Last 14 days">
+            <ChartCard title={tx("Tasks by Status")} subtitle={tx("Last 14 days")}>
               <IssueStatusChart issues={issues ?? []} />
             </ChartCard>
-            <ChartCard title="Success Rate" subtitle="Last 14 days">
+            <ChartCard title={tx("Success Rate")} subtitle={tx("Last 14 days")}>
               <SuccessRateChart activity={data.runActivity} />
             </ChartCard>
           </div>
@@ -492,7 +493,7 @@ export function Dashboard() {
             {recentActivity.length > 0 && (
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-                  Recent Activity
+                  {tx("Recent Activity")}
                 </h3>
                 <Card className="@container block py-0 divide-y divide-border overflow-hidden">
                   {designSandbox ? <ActivityList events={recentActivity} agentMap={agentMap} userProfileMap={userProfileMap} entityNameMap={entityNameMap} entityTitleMap={entityTitleMap} rowClassName={event => animatedActivityIds.has(event.id) ? "activity-row-enter" : undefined} /> : recentActivity.map((event) => (
@@ -513,11 +514,11 @@ export function Dashboard() {
             {/* Recent Tasks */}
             <div className="min-w-0">
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-                Recent Tasks
+                {tx("Recent Tasks")}
               </h3>
               {recentIssues.length === 0 ? (
                 <Card className="block p-4">
-                  <p className="text-sm text-muted-foreground">No tasks yet.</p>
+                  <p className="text-sm text-muted-foreground">{tx("No tasks yet.")}</p>
                 </Card>
               ) : (
                 designSandbox ? <Card className="block overflow-hidden py-0">

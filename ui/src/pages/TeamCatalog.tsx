@@ -112,6 +112,7 @@ import {
   XOctagon,
 } from "lucide-react";
 import { GithubIcon } from "../components/icons/github-icon";
+import { tx } from "@/i18n/phrases";
 
 // Matches design §11 breakpoints. Module-level so stories and the page agree.
 const DESKTOP_MIN = 1024;
@@ -322,7 +323,7 @@ function ProvenanceBadge({ team }: { team: CatalogTeam }) {
           {team.packageVersion ? `@${team.packageVersion}` : ""}
         </Badge>
       </TooltipTrigger>
-      <TooltipContent>Catalog package provenance</TooltipContent>
+      <TooltipContent>{tx("Catalog package provenance")}</TooltipContent>
     </Tooltip>
   );
 }
@@ -517,7 +518,7 @@ export function TeamHierarchyPreview({ team }: { team: CatalogTeam }) {
           </li>
         ))}
         {team.agentSlugs.length === 0 && (
-          <li className="px-3 py-2 text-xs text-muted-foreground">No agents in this team.</li>
+          <li className="px-3 py-2 text-xs text-muted-foreground">{tx("No agents in this team.")}</li>
         )}
       </ul>
     </div>
@@ -557,7 +558,7 @@ function MetricTile({
 }
 
 export function RequiredSkillsList({ skills }: { skills: CatalogTeamSkillRequirement[] }) {
-  if (skills.length === 0) return <p className="text-sm text-muted-foreground">No required skills.</p>;
+  if (skills.length === 0) return <p className="text-sm text-muted-foreground">{tx("No required skills.")}</p>;
   return (
     <ul className="space-y-1">
       {skills.map((skill) => (
@@ -589,7 +590,7 @@ export function EnvInputsList({ inputs }: { inputs: CatalogTeamEnvInputSummary[]
   if (inputs.length === 0) return null;
   return (
     <div className="space-y-1.5">
-      <SectionHeader>Secrets & env inputs</SectionHeader>
+      <SectionHeader>{tx("Secrets & env inputs")}</SectionHeader>
       <ul className="space-y-1">
         {inputs.map((input) => (
           <li
@@ -650,13 +651,13 @@ export function ExternalSourcesList({ sources }: { sources: CatalogTeamSourceRef
                 <span className="font-mono text-xs truncate">{source.ref}</span>
                 <span className="ml-auto text-(length:--text-micro)">
                   {code === "ok" && (
-                    <span className="text-emerald-600 dark:text-emerald-300">Pinned</span>
+                    <span className="text-emerald-600 dark:text-emerald-300">{tx("Pinned")}</span>
                   )}
                   {code === "unpinned" && (
-                    <span className="text-amber-600 dark:text-amber-300">Unpinned</span>
+                    <span className="text-amber-600 dark:text-amber-300">{tx("Unpinned")}</span>
                   )}
                   {code === "unsupported_in_ui" && (
-                    <span className="text-rose-600 dark:text-rose-300">Unsupported in browser install</span>
+                    <span className="text-rose-600 dark:text-rose-300">{tx("Unsupported in browser install")}</span>
                   )}
                 </span>
               </li>
@@ -715,7 +716,7 @@ export function TeamDetailPane({
       ) : (
         <Download className="h-4 w-4" />
       )}
-      {isInstalled ? "Re-install latest" : "Install team"}
+      {tx(isInstalled ? "Re-install latest" : "Install team")}
     </Button>
   );
 
@@ -736,7 +737,7 @@ export function TeamDetailPane({
               <ProvenanceBadge team={team} />
               {isInstalled && !outOfDate && (
                 <Badge variant="secondary" className="gap-1 text-(length:--text-nano)">
-                  <CheckCircle2 className="h-3 w-3" /> Installed
+                  <CheckCircle2 className="h-3 w-3" /> {tx("Installed")}
                 </Badge>
               )}
               {outOfDate && (
@@ -744,7 +745,7 @@ export function TeamDetailPane({
                   variant="outline"
                   className="gap-1 border-amber-500/40 bg-amber-500/10 text-(length:--text-nano) text-amber-600 dark:text-amber-300"
                 >
-                  <ChevronUp className="h-3 w-3" /> Update available
+                  <ChevronUp className="h-3 w-3" /> {tx("Update available")}
                 </Badge>
               )}
             </div>
@@ -761,7 +762,7 @@ export function TeamDetailPane({
               <TooltipTrigger asChild>
                 <span tabIndex={0}>{installButton}</span>
               </TooltipTrigger>
-              <TooltipContent>Requires board operator or agent-create permissions.</TooltipContent>
+              <TooltipContent>{tx("Requires board operator or agent-create permissions.")}</TooltipContent>
             </Tooltip>
           ) : (
             installButton
@@ -779,22 +780,22 @@ export function TeamDetailPane({
 
         {/* Summary grid */}
         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
-          <MetricTile label="Agents" value={team.counts.agents} Icon={Users2} />
-          <MetricTile label="Projects" value={team.counts.projects} Icon={FolderKanban} />
-          <MetricTile label="Routines" value={team.counts.routines} Icon={Repeat} />
-          <MetricTile label="Required skills" value={skillCount(team)} Icon={Boxes} />
+          <MetricTile label={tx("Agents")} value={team.counts.agents} Icon={Users2} />
+          <MetricTile label={tx("Projects")} value={team.counts.projects} Icon={FolderKanban} />
+          <MetricTile label={tx("Routines")} value={team.counts.routines} Icon={Repeat} />
+          <MetricTile label={tx("Required skills")} value={skillCount(team)} Icon={Boxes} />
         </div>
 
         {/* Agent hierarchy */}
         <div className="space-y-2">
-          <SectionHeader>Agent hierarchy</SectionHeader>
+          <SectionHeader>{tx("Agent hierarchy")}</SectionHeader>
           <TeamHierarchyPreview team={team} />
         </div>
 
         {/* Projects */}
         {team.projectSlugs.length > 0 && (
           <div className="space-y-2">
-            <SectionHeader>Projects</SectionHeader>
+            <SectionHeader>{tx("Projects")}</SectionHeader>
             <ul className="space-y-1">
               {team.projectSlugs.map((slug) => (
                 <li key={slug} className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm">
@@ -809,7 +810,7 @@ export function TeamDetailPane({
 
         {/* Required skills */}
         <div className="space-y-2">
-          <SectionHeader>Required skills</SectionHeader>
+          <SectionHeader>{tx("Required skills")}</SectionHeader>
           <RequiredSkillsList skills={team.requiredSkills} />
         </div>
 
@@ -821,7 +822,7 @@ export function TeamDetailPane({
 
         {/* File inventory */}
         <div className="space-y-2">
-          <SectionHeader>Files</SectionHeader>
+          <SectionHeader>{tx("Files")}</SectionHeader>
           <div className="rounded-md border border-border p-1.5">
             <TeamFileTree
               nodes={tree}
@@ -840,7 +841,7 @@ export function TeamDetailPane({
                   className="text-xs text-muted-foreground hover:text-foreground"
                   onClick={() => onSelectFile(null)}
                 >
-                  Close
+                  {tx("Close")}
                 </button>
               </div>
               <div className="max-h-96 overflow-auto p-3">
@@ -1369,7 +1370,7 @@ export function TeamInstallerDialog({
             <div role="alert" className="flex items-start gap-2 rounded-md border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-sm text-rose-700 dark:text-rose-300">
               <XCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <div>
-                <p className="font-medium">Install failed</p>
+                <p className="font-medium">{tx("Install failed")}</p>
                 <p className="mt-0.5 text-xs">{applyError}</p>
                 <p className="mt-1 text-xs opacity-80">
                   Partial state is not rolled back. Review the organization activity log before retrying.
@@ -1386,9 +1387,9 @@ export function TeamInstallerDialog({
       <div className="flex items-center justify-between gap-3">
         <div>
           {stepIndex > 0 ? (
-            <Button variant="ghost" onClick={goBack}>Back</Button>
+            <Button variant="ghost" onClick={goBack}>{tx("Back")}</Button>
           ) : (
-            <Button variant="ghost" onClick={onClose}>Cancel</Button>
+            <Button variant="ghost" onClick={onClose}>{tx("Cancel")}</Button>
           )}
         </div>
         <div className="flex items-center gap-3">
@@ -1404,7 +1405,7 @@ export function TeamInstallerDialog({
           )}
           {currentStep === "preview" && !hasErrors && missingRequiredSecretCount === 0 && missingEnabledAdapter && (
             <span className="text-xs text-rose-600 dark:text-rose-300">
-              Enable a legacy adapter to install this team
+              {tx("Enable a legacy adapter to install this team")}
             </span>
           )}
           {currentStep === "preview" ? (
@@ -1416,17 +1417,17 @@ export function TeamInstallerDialog({
             ) : (
               <Button onClick={submitInstall} disabled={installBlocked || previewMutation.isPending || !previewResult}>
                 {needsScriptsConfirm ? <AlertTriangle className="h-4 w-4" /> : <Download className="h-4 w-4" />}
-                {needsScriptsConfirm ? "Install with executables" : "Install team"}
+                {tx(needsScriptsConfirm ? "Install with executables" : "Install team")}
               </Button>
             )
           ) : (
-            <Button onClick={goNext} disabled={!canContinue(currentStep)}>Continue</Button>
+            <Button onClick={goNext} disabled={!canContinue(currentStep)}>{tx("Continue")}</Button>
           )}
         </div>
       </div>
     ) : phase === "error" ? (
       <div className="flex justify-end">
-        <Button variant="ghost" onClick={onClose}>Close</Button>
+        <Button variant="ghost" onClick={onClose}>{tx("Close")}</Button>
       </div>
     ) : null;
 
@@ -1490,7 +1491,7 @@ export function StepTargetManager({
       </div>
 
       <div className="space-y-1.5">
-        <SectionHeader>Root agents</SectionHeader>
+        <SectionHeader>{tx("Root agents")}</SectionHeader>
         <ul className="rounded-md border border-border">
           {team.rootAgentSlugs.map((slug) => (
             <li key={slug} className="flex items-center gap-2 border-b border-border/60 px-3 py-2 text-sm last:border-b-0">
@@ -1506,11 +1507,11 @@ export function StepTargetManager({
 
       {!fullCompany && (
         <div className="space-y-1.5" aria-describedby="target-manager-help">
-          <SectionHeader>Target manager</SectionHeader>
+          <SectionHeader>{tx("Target manager")}</SectionHeader>
           {agents.length === 0 ? <p role="status" className="rounded-md border border-border p-3 text-sm text-muted-foreground">No agents are available to manage this team. Create an agent in your company, then try again.</p> : <Command className="rounded-md border border-border">
-            <CommandInput placeholder="Search agents…" />
+            <CommandInput placeholder={tx("Search agents…")} />
             <CommandList>
-              <CommandEmpty>No agents found.</CommandEmpty>
+              <CommandEmpty>{tx("No agents found.")}</CommandEmpty>
               <CommandGroup>
                 {agents.map((agent) => (
                   <CommandItem
@@ -1539,7 +1540,7 @@ export function StepTargetManager({
             checked={fullCompany}
             onChange={(e) => onToggleFullCompany(e.target.checked)}
           />
-          Use this team as a full-organization package (no target manager)
+          {tx("Use this team as a full-organization package (no target manager)")}
         </label>
       )}
     </div>
@@ -1603,20 +1604,20 @@ export function StepSourcePolicy({
 
       <div className="space-y-2.5 rounded-md border border-border p-3">
         <PolicyToggle
-          label="Allow external sources"
-          description="Resolve github/url skill and team sources at install time."
+          label={tx("Allow external sources")}
+          description={tx("Resolve github/url skill and team sources at install time.")}
           checked={allowExternalSources}
           onChange={(v) => onChange("external", v)}
         />
         <PolicyToggle
-          label="Allow unpinned optional sources"
-          description="Permit optional sources that are not pinned to a ref or checksum."
+          label={tx("Allow unpinned optional sources")}
+          description={tx("Permit optional sources that are not pinned to a ref or checksum.")}
           checked={allowUnpinnedOptionalSources}
           onChange={(v) => onChange("unpinned", v)}
         />
         <PolicyToggle
-          label="Allow local-path sources"
-          description="Required for local_path / agent_package sources. Development use only."
+          label={tx("Allow local-path sources")}
+          description={tx("Required for local_path / agent_package sources. Development use only.")}
           checked={allowLocalPathSources}
           onChange={(v) => onChange("localPath", v)}
         />
@@ -1814,7 +1815,7 @@ export function StepPreview({
           {error}
         </div>
         <Button variant="outline" onClick={onRetry}>
-          <RotateCcw className="h-4 w-4" /> Retry
+          <RotateCcw className="h-4 w-4" /> {tx("Retry")}
         </Button>
       </div>
     );
@@ -1830,25 +1831,25 @@ export function StepPreview({
     <div className="space-y-4">
       {/* Summary */}
       <div className="space-y-2">
-        <SectionHeader>Summary</SectionHeader>
+        <SectionHeader>{tx("Summary")}</SectionHeader>
         <div className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
-          <SummaryCount label="Agents" value={plan.agentPlans.length} />
-          <SummaryCount label="Projects" value={plan.projectPlans.length} />
-          <SummaryCount label="Starter tasks" value={plan.issuePlans.length} />
-          <SummaryCount label="Required skills" value={result.skillPreparations.length} />
+          <SummaryCount label={tx("Agents")} value={plan.agentPlans.length} />
+          <SummaryCount label={tx("Projects")} value={plan.projectPlans.length} />
+          <SummaryCount label={tx("Starter tasks")} value={plan.issuePlans.length} />
+          <SummaryCount label={tx("Required skills")} value={result.skillPreparations.length} />
         </div>
       </div>
 
       {/* Collision strategy */}
       <div className="flex items-center gap-3">
-        <span className="text-sm font-medium">Collision strategy</span>
+        <span className="text-sm font-medium">{tx("Collision strategy")}</span>
         <Select value={collisionStrategy} onValueChange={(v) => onCollisionStrategyChange(v as CompanyPortabilityCollisionStrategy)}>
           <SelectTrigger className="h-8 w-40">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="rename">Rename collisions</SelectItem>
-            <SelectItem value="skip">Skip collisions</SelectItem>
+            <SelectItem value="rename">{tx("Rename collisions")}</SelectItem>
+            <SelectItem value="skip">{tx("Skip collisions")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -1856,7 +1857,7 @@ export function StepPreview({
       {/* Errors / warnings */}
       {result.errors.length > 0 && (
         <div role="alert" className="rounded-md border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-sm text-rose-700 dark:text-rose-300">
-          <p className="font-medium">Install blocked</p>
+          <p className="font-medium">{tx("Install blocked")}</p>
           <ul className="mt-1 list-disc space-y-0.5 pl-4 text-xs">
             {result.errors.map((e, i) => <li key={i}>{e}</li>)}
           </ul>
@@ -1941,7 +1942,7 @@ export function StepPreview({
                   </Select>
                 ) : (
                   <span className="ml-auto text-xs text-rose-600 dark:text-rose-300">
-                    No enabled legacy adapter
+                    {tx("No enabled legacy adapter")}
                   </span>
                 )}
               </li>
@@ -2011,7 +2012,7 @@ export function StepPreview({
 
       {/* Provenance */}
       <div className="rounded-md border border-border px-3 py-2.5 text-xs text-muted-foreground">
-        Imported entities are stamped with <code className="font-mono">metadata.paperclip.catalogTeam</code>{" "}
+        {tx("Imported entities are stamped with")} <code className="font-mono">metadata.paperclip.catalogTeam</code>{" "}
         ({team.packageName ?? team.key}, content hash <code className="font-mono">{team.contentHash.slice(0, 16)}…</code>),
         and an activity event is recorded for preview and install.
       </div>
@@ -2084,16 +2085,16 @@ export function ApplySuccess({
     <div className="space-y-4 py-2">
       <div className="flex items-center gap-2">
         <CheckCircle2 className="h-6 w-6 text-emerald-500" />
-        <p className="text-base font-semibold">Team installed</p>
+        <p className="text-base font-semibold">{tx("Team installed")}</p>
       </div>
       <p className="text-sm text-muted-foreground">
         {team.name} was imported into your organization. Imported entities are stamped with catalog provenance.
       </p>
       {result && (
         <ul className="divide-y divide-border/60 rounded-md border border-border px-3">
-          <ResultRow label="Agents imported" count={agentsCreated} />
-          <ResultRow label="Projects imported" count={projectsCreated} />
-          <ResultRow label="Skills resolved" count={skillsResolved} />
+          <ResultRow label={tx("Agents imported")} count={agentsCreated} />
+          <ResultRow label={tx("Projects imported")} count={projectsCreated} />
+          <ResultRow label={tx("Skills resolved")} count={skillsResolved} />
         </ul>
       )}
       {warnings.length > 0 && (
@@ -2110,7 +2111,7 @@ export function ApplySuccess({
         <li><a className="text-primary hover:underline" href="/activity">View activity log →</a></li>
       </ul>
       <div className="flex justify-end">
-        <Button onClick={onClose}>Done</Button>
+        <Button onClick={onClose}>{tx("Done")}</Button>
       </div>
     </div>
   );
@@ -2151,7 +2152,7 @@ export function TeamRow({
           <Tooltip>
             <TooltipTrigger asChild>
               <span
-                aria-label="Update available"
+                aria-label={tx("Update available")}
                 className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-300"
               >
                 <ChevronUp className="h-3 w-3" />
@@ -2165,7 +2166,7 @@ export function TeamRow({
             <TooltipTrigger asChild>
               <AlertTriangle className={cn("ml-auto h-3.5 w-3.5", risk === "blocked" ? "text-rose-500" : "text-amber-500")} />
             </TooltipTrigger>
-            <TooltipContent>Has external sources</TooltipContent>
+            <TooltipContent>{tx("Has external sources")}</TooltipContent>
           </Tooltip>
         )}
       </div>
@@ -2388,7 +2389,7 @@ export function TeamCatalog() {
   if (!selectedCompanyId) {
     return (
       <div className="p-8">
-        <EmptyState icon={Users2} message="Select an organization to browse the team catalog." />
+        <EmptyState icon={Users2} message={tx("Select an organization to browse the team catalog.")} />
       </div>
     );
   }
@@ -2397,13 +2398,13 @@ export function TeamCatalog() {
     <div className="flex h-full flex-col">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border px-5 py-3">
-        <h1 className="text-lg font-semibold">Teams</h1>
+        <h1 className="text-lg font-semibold">{tx("Teams")}</h1>
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={q}
             onChange={(e) => setFilterParam("search", e.target.value)}
-            placeholder="Search teams"
+            placeholder={tx("Search teams")}
             className="h-8 w-56 pl-8"
           />
         </div>
@@ -2417,11 +2418,11 @@ export function TeamCatalog() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
-            <DropdownMenuLabel>Kind</DropdownMenuLabel>
+            <DropdownMenuLabel>{tx("Kind")}</DropdownMenuLabel>
             <DropdownMenuRadioGroup value={kindFilter} onValueChange={(v) => setFilterParam("kind", v)}>
-              <DropdownMenuRadioItem value="all">All kinds</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="bundled">Bundled</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="optional">Optional</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="all">{tx("All kinds")}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="bundled">{tx("Bundled")}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="optional">{tx("Optional")}</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -2435,9 +2436,9 @@ export function TeamCatalog() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
-              <DropdownMenuLabel>Category</DropdownMenuLabel>
+              <DropdownMenuLabel>{tx("Category")}</DropdownMenuLabel>
               <DropdownMenuRadioGroup value={categoryFilter} onValueChange={(v) => setFilterParam("category", v)}>
-                <DropdownMenuRadioItem value="">All categories</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="">{tx("All categories")}</DropdownMenuRadioItem>
                 {categories.map((cat) => (
                   <DropdownMenuRadioItem key={cat} value={cat}>{titleCase(cat)}</DropdownMenuRadioItem>
                 ))}
@@ -2454,12 +2455,12 @@ export function TeamCatalog() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
-            <DropdownMenuLabel>Risk</DropdownMenuLabel>
+            <DropdownMenuLabel>{tx("Risk")}</DropdownMenuLabel>
             <DropdownMenuRadioGroup value={riskFilter} onValueChange={(v) => setFilterParam("risk", v)}>
-              <DropdownMenuRadioItem value="any">Any risk</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="safe">Safe only</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="has_warnings">Has warnings</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="blocked">Blocked</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="any">{tx("Any risk")}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="safe">{tx("Safe only")}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="has_warnings">{tx("Has warnings")}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="blocked">{tx("Blocked")}</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
             {anyFilterActive && (
               <>
@@ -2469,7 +2470,7 @@ export function TeamCatalog() {
                   className="flex w-full items-center gap-1.5 px-2 py-1.5 text-xs text-muted-foreground hover:text-foreground"
                   onClick={() => setSearchParams(new URLSearchParams())}
                 >
-                  <RotateCcw className="h-3 w-3" /> Reset filters
+                  <RotateCcw className="h-3 w-3" /> {tx("Reset filters")}
                 </button>
               </>
             )}
@@ -2478,7 +2479,7 @@ export function TeamCatalog() {
 
         {anyFilterActive && (
           <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => setSearchParams(new URLSearchParams())}>
-            Reset filters
+            {tx("Reset filters")}
           </Button>
         )}
       </div>
@@ -2500,19 +2501,19 @@ export function TeamCatalog() {
           ) : catalogQuery.isError ? (
             <div className="p-4">
               <div role="alert" className="rounded-md border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-sm text-rose-700 dark:text-rose-300">
-                Failed to load team catalog.
+                {tx("Failed to load team catalog.")}
               </div>
               <Button variant="outline" size="sm" className="mt-3" onClick={() => catalogQuery.refetch()}>
-                <RotateCcw className="h-3.5 w-3.5" /> Retry
+                <RotateCcw className="h-3.5 w-3.5" /> {tx("Retry")}
               </Button>
             </div>
           ) : teams.length === 0 ? (
-            <EmptyState icon={Users2} message="No team catalog configured." />
+            <EmptyState icon={Users2} message={tx("No team catalog configured.")} />
           ) : filtered.length === 0 ? (
             <EmptyState
               icon={Search}
-              message="No teams match this filter."
-              action="Reset filters"
+              message={tx("No teams match this filter.")}
+              action={tx("Reset filters")}
               onAction={() => setSearchParams(new URLSearchParams())}
             />
           ) : (
@@ -2581,7 +2582,7 @@ export function TeamCatalog() {
                 onClick={() => navigate(withFilters(TEAM_CATALOG_ROUTE_ROOT))}
                 className="flex items-center gap-1.5 border-b border-border px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
               >
-                <ChevronLeft className="h-4 w-4" /> Back to catalog
+                <ChevronLeft className="h-4 w-4" /> {tx("Back to catalog")}
               </button>
             )}
             {selectedTeam ? (
@@ -2598,7 +2599,7 @@ export function TeamCatalog() {
               />
             ) : (
               <div className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-                Select a team to view details.
+                {tx("Select a team to view details.")}
               </div>
             )}
           </div>

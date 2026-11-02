@@ -1,3 +1,4 @@
+import { tx } from "@/i18n/phrases";
 import { useCoordinatorWorkspaceEnabled } from "@/hooks/useCoordinatorWorkspaceEnabled";
 import { useMemo } from "react";
 import { useCoordinatorAttentionCount } from "@/hooks/useCoordinatorAttentionCount";
@@ -125,7 +126,7 @@ export function MobileBottomNav({ visible }: MobileBottomNavProps) {
                 )}
               >
                 <Icon className="h-(--sz-18px) w-(--sz-18px)" />
-                <span className="truncate">{item.label}</span>
+                <span className="truncate">{tx(item.label)}</span>
               </button>
             );
           }
@@ -155,7 +156,7 @@ export function MobileBottomNav({ visible }: MobileBottomNavProps) {
                       </Badge>
                     )}
                   </span>
-                  <span className="truncate">{item.label}</span>
+                  <span className="truncate">{tx(item.label)}</span>
                 </>
               )}
             </NavLink>

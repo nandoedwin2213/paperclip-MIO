@@ -24,6 +24,7 @@ import { ProjectsToolbar, type ProjectSortField, type ProjectSortDir } from "@/c
 import { Hexagon } from "lucide-react";
 import { Lock } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { tx } from "@/i18n/phrases";
 
 function compareProjectNames(left: Project, right: Project) {
   const nameDiff = left.name.localeCompare(right.name, undefined, { sensitivity: "base" });
@@ -116,7 +117,7 @@ export function Projects() {
   }, [membershipsQuery.data, sortedProjects]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Hexagon} message="Select an organization to view projects." />;
+    return <EmptyState icon={Hexagon} message={tx("Select an organization to view projects.")} />;
   }
 
   if (isLoading) {
@@ -133,19 +134,19 @@ export function Projects() {
       {!isLoading && projects.length === 0 && (
         <EmptyState
           icon={Hexagon}
-          message="No projects yet."
-          action="Add Project"
+          message={tx("No projects yet.")}
+          action={tx("Add Project")}
           onAction={openNewProject}
         />
       )}
 
-      {projects.length > 0 && sortedProjects.length === 0 && <p className="text-sm text-muted-foreground">No projects match your search.</p>}
+      {projects.length > 0 && sortedProjects.length === 0 && <p className="text-sm text-muted-foreground">{tx("No projects match your search.")}</p>}
 
       {sortedProjects.length > 0 && (
         <div className="space-y-6">
           {([
-            ["My Projects", groupedProjects.mine],
-            ["Other Projects", groupedProjects.other],
+            [tx("My Projects"), groupedProjects.mine],
+            [tx("Other Projects"), groupedProjects.other],
           ] as const).map(([label, sectionProjects]) => {
             if (sectionProjects.length === 0) return null;
 
@@ -177,7 +178,7 @@ export function Projects() {
                         className={state === "left" ? "group text-foreground/55" : "group"}
                         trailing={
                           <div className="flex items-center gap-3">
-                            {project.visibility === "private" ? <Lock className="size-4 shrink-0 text-muted-foreground" aria-label="Private project" /> : null}
+                            {project.visibility === "private" ? <Lock className="size-4 shrink-0 text-muted-foreground" aria-label={tx("Private project")} /> : null}
                             <span
                               className="hidden text-xs text-muted-foreground tabular-nums sm:inline"
                               title={`${formatNumber(project.taskCount ?? 0)} task${(project.taskCount ?? 0) === 1 ? "" : "s"}`}

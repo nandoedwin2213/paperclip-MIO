@@ -716,7 +716,7 @@ export function TeamDetailPane({
       ) : (
         <Download className="h-4 w-4" />
       )}
-      {isInstalled ? "Re-install latest" : "Install team"}
+      {tx(isInstalled ? "Re-install latest" : "Install team")}
     </Button>
   );
 
@@ -1417,7 +1417,7 @@ export function TeamInstallerDialog({
             ) : (
               <Button onClick={submitInstall} disabled={installBlocked || previewMutation.isPending || !previewResult}>
                 {needsScriptsConfirm ? <AlertTriangle className="h-4 w-4" /> : <Download className="h-4 w-4" />}
-                {needsScriptsConfirm ? "Install with executables" : "Install team"}
+                {tx(needsScriptsConfirm ? "Install with executables" : "Install team")}
               </Button>
             )
           ) : (

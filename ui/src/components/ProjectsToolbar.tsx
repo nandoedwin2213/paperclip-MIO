@@ -2,6 +2,7 @@ import { ArrowUpDown, Check, Plus } from "lucide-react";
 import { ToolbarSearch } from "./ToolbarSearch";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { tx } from "@/i18n/phrases";
 
 export type ProjectSortField = "name" | "updated" | "created" | "targetDate";
 export type ProjectSortDir = "asc" | "desc";
@@ -23,13 +24,13 @@ export function ProjectsToolbar({ query, onQueryChange, sortField, sortDir, onSo
   onNewProject: () => void;
 }) {
   const sortLabel = PROJECT_SORT_OPTIONS.find(option => option.field === sortField)?.label ?? "Name";
-  return <div data-canonical-toolbar="projects" role="toolbar" aria-label="Projects controls" className="flex flex-wrap items-center gap-4">
-    <ToolbarSearch query={query} onQueryChange={onQueryChange} label="Search projects" placeholder="Search projects…" />
+  return <div data-canonical-toolbar="projects" role="toolbar" aria-label={tx("Projects controls")} className="flex flex-wrap items-center gap-4">
+    <ToolbarSearch query={query} onQueryChange={onQueryChange} label={tx("Search projects")} placeholder={tx("Search projects…")} />
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" title="Sort">
+        <Button variant="outline" size="sm" title={tx("Sort")}>
           <ArrowUpDown className="h-3.5 w-3.5 sm:h-3 sm:w-3 sm:mr-1" />
-          <span>Sort: {sortLabel}</span>
+          <span>{tx("Sort")}: {tx(sortLabel)}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="w-44 p-0">
@@ -64,7 +65,7 @@ export function ProjectsToolbar({ query, onQueryChange, sortField, sortDir, onSo
     <div className="design-toolbar-actions">
       <Button size="sm" variant="outline" data-toolbar-primary onClick={openNewProject}>
           <Plus className="h-4 w-4 mr-1" />
-          Add Project
+          {tx("Add Project")}
       </Button>
     </div>
   </div>;

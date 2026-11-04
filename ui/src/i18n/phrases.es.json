@@ -591,5 +591,18 @@
 "Sign in / Create account": "Iniciar sesión / Crear cuenta",
 "No admin has claimed this instance yet. Claim it now to become the first admin and start onboarding.": "Nadie ha reclamado aún esta instalación. Reclámala ahora para ser el primer administrador y empezar la configuración.",
 "Claiming...": "Reclamando...",
-"Claim this instance": "Reclamar esta instalación"
+"Claim this instance": "Reclamar esta instalación",
+"Sign in to Galeno IA": "Inicia sesión en Galeno IA",
+"Create your Galeno IA account": "Crea tu cuenta de Galeno IA",
+"Use your email and password to access this instance.": "Usa tu correo y contraseña para entrar a esta instalación.",
+"Create an account for this instance. Email confirmation is not required in v1.": "Crea una cuenta para esta instalación. No hace falta confirmar el correo.",
+"Working…": "Procesando…",
+"Sign In": "Iniciar sesión",
+"Create Account": "Crear cuenta",
+"Need an account?": "¿No tienes cuenta?",
+"Already have an account?": "¿Ya tienes cuenta?",
+"Create one": "Crea una",
+"Sign in": "Inicia sesión",
+"Authentication failed": "No se pudo iniciar sesión",
+"Unable to check sign-in. Refresh and try again.": "No se pudo comprobar el acceso. Recarga e inténtalo de nuevo."
 }
